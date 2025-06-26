@@ -2,145 +2,344 @@
 
 This document tests all the custom Markdoc nodes and tags defined in the markdoc configuration.
 
-# Code Components Tests
+# Code Fence Tests (fence nodes render as CodeSnippet)
 
-## CodeSnippet Tests (Self-Closing)
+## Basic Code Fence Examples
 
-{% codeSnippet code="console.log('Hello, World!');" language="javascript" /%}
+```javascript
+console.log('Hello, World!');
+```
 
-{% codeSnippet code="const greeting: string = 'Hello, TypeScript!';\nconsole.log(greeting);" language="typescript" title="TypeScript Example" /%}
+```typescript {% title="TypeScript Example" %}
+const greeting: string = 'Hello, TypeScript!';
+console.log(greeting);
+```
 
-{% codeSnippet code="def hello_world():\n    print('Hello, Python!')\n\nhello_world()" language="python" filename="hello.py" showLineNumbers=true /%}
+```python {% filename="hello.py" showLineNumbers=true %}
+def hello_world():
+    print('Hello, Python!')
 
-{% codeSnippet code="<div className='container'>\n  <h1>Hello React!</h1>\n  <p>This is a JSX example</p>\n</div>" language="jsx" title="React Component" filename="HelloComponent.jsx" showLineNumbers=true copyable=true /%}
+hello_world()
+```
 
-{% codeSnippet code="# Hello Bash\necho 'Setting up environment...'\nnpm install\nnpm run build" language="bash" title="Build Script" copyable=false /%}
+```jsx {% title="React Component" filename="HelloComponent.jsx" showLineNumbers=true %}
+<div className='container'>
+  <h1>Hello React!</h1>
+  <p>This is a JSX example</p>
+</div>
+```
 
-{% codeSnippet code="{\n  \"name\": \"my-project\",\n  \"version\": \"1.0.0\",\n  \"scripts\": {\n    \"dev\": \"next dev\",\n    \"build\": \"next build\"\n  }\n}" language="json" filename="package.json" title="Package Configuration" showLineNumbers=true /%}
+```bash {% title="Build Script" icon="terminal" %}
+# Hello Bash
+echo 'Setting up environment...'
+npm install
+npm run build
+```
+
+```json {% filename="package.json" title="Package Configuration" showLineNumbers=true %}
+{
+  "name": "my-project",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build"
+  }
+}
+```
+
+## Code Fences with New Attributes
+
+```javascript {% title="Code with Icon" icon="code" info="This shows the new icon attribute" %}
+function greet(name) {
+  return `Hello, ${name}!`;
+}
+```
+
+```python {% content="Database Connection" info="Example showing content and info attributes" %}
+import psycopg2
+
+def connect_to_db():
+    conn = psycopg2.connect(
+        host="localhost",
+        database="myapp",
+        user="user",
+        password="password"
+    )
+    return conn
+```
+
+## Line Highlighting Examples
+
+```javascript {% title="Highlight Single Lines" showLineNumbers=true highlight="3,8,15" %}
+function createUser(userData) {
+  // Validate input data
+  if (!userData.email) {
+    throw new Error('Email is required');
+  }
+  
+  // Create user object
+  const user = {
+    id: generateId(),
+    email: userData.email,
+    name: userData.name || 'Anonymous',
+    createdAt: new Date()
+  };
+  
+  // Save to database
+  return database.save(user);
+}
+```
+
+```jsx {% title="Highlight Line Ranges" showLineNumbers=true highlight="1-2,9-19,31-35" filename="UserProfile.jsx" %}
+import React, { useState, useEffect } from 'react';
+import { fetchUserData } from '../api/users';
+
+function UserProfile({ userId }) {
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    async function loadUser() {
+      try {
+        setLoading(true);
+        const userData = await fetchUserData(userId);
+        setUser(userData);
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    if (userId) {
+      loadUser();
+    }
+  }, [userId]);
+
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>Error: {error}</div>;
+  if (!user) return <div>User not found</div>;
+
+  return (
+    <div className="user-profile">
+      <h2>{user.name}</h2>
+      <p>{user.email}</p>
+    </div>
+  );
+}
+```
+
+```python {% title="Mixed Highlighting" showLineNumbers=true highlight="8,10-15,23,28" filename="database.py" %}
+class DatabaseConnection:
+    def __init__(self, host, port, database):
+        self.host = host
+        self.port = port
+        self.database = database
+        self.connection = None
+    
+    def connect(self):
+        """Establish database connection"""
+        try:
+            self.connection = psycopg2.connect(
+                host=self.host,
+                port=self.port,
+                database=self.database
+            )
+            print(f"Connected to {self.database}")
+        except Exception as e:
+            print(f"Connection failed: {e}")
+            raise
+    
+    def execute_query(self, query, params=None):
+        """Execute a database query"""
+        if not self.connection:
+            raise Exception("Not connected to database")
+        
+        cursor = self.connection.cursor()
+        try:
+            cursor.execute(query, params)
+            return cursor.fetchall()
+        except Exception as e:
+            self.connection.rollback()
+            raise
+        finally:
+            cursor.close()
+```
 
 ---
 
-# Card Component Tests
+# Steps Component Tests
 
-## Basic Cards
-{% column %}
+## Basic Steps Example
 
-{% card title="Basic Card" description="Default card with text icon" %}
-This card uses all default attributes and should display properly.
+{% steps %}
+{% step title="Install Dependencies" %}
+First, install the required packages for your project.
+
+```bash
+npm install @markdoc/markdoc react
+```
+
+This will add Markdoc and React to your project dependencies.
+{% /step %}
+
+{% step title="Create Configuration" %}
+Set up your Markdoc configuration file.
+
+```javascript {% filename="markdoc.config.js" %}
+import { Config } from '@markdoc/markdoc';
+
+const config = {
+  nodes: {},
+  tags: {}
+};
+
+export default config;
+```
+
+The configuration defines how your content will be rendered.
+{% /step %}
+
+{% step title="Build Your First Document" %}
+Create a Markdoc file with some content.
+
+```markdown {% filename="example.md" %}
+# Welcome to Markdoc
+
+This is your first Markdoc document!
+
+{% callout type="info" %}
+Markdoc combines the simplicity of Markdown with the power of React.
+{% /callout %}
+```
+{% /step %}
+{% /steps %}
+
+## Advanced Steps with Rich Content
+
+{% steps %}
+{% step title="Database Setup" %}
+Configure your database connection and schema.
+
+```sql {% filename="schema.sql" showLineNumbers=true %}
+CREATE TABLE users (
+  id SERIAL PRIMARY KEY,
+  email VARCHAR(255) UNIQUE NOT NULL,
+  name VARCHAR(100) NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE INDEX idx_users_email ON users(email);
+```
+
+{% callout type="warning" %}
+Make sure to backup your database before running schema changes.
+{% /callout %}
+{% /step %}
+
+{% step title="API Implementation" %}
+Build the API endpoints for user management.
+
+```javascript {% filename="api/users.js" highlight="5-7,12-14" %}
+const express = require('express');
+const router = express.Router();
+
+router.get('/users', async (req, res) => {
+  try {
+    const users = await db.query('SELECT * FROM users');
+    res.json(users);
+  } catch (error) {
+    res.status(500).json({ error: 'Database error' });
+  }
+});
+
+router.post('/users', async (req, res) => {
+  const { email, name } = req.body;
+  
+  try {
+    const result = await db.query(
+      'INSERT INTO users (email, name) VALUES ($1, $2) RETURNING *',
+      [email, name]
+    );
+    res.status(201).json(result.rows[0]);
+  } catch (error) {
+    res.status(400).json({ error: 'Invalid data' });
+  }
+});
+
+module.exports = router;
+```
+
+{% column cols=2 gap="sm" %}
+{% card title="GET /users" description="Retrieve all users" %}
+Returns a list of all users in the system.
 {% /card %}
 
-{% card title="Card with Image" description="Testing image attribute" image="/path/to/image.jpg" imageAlt="Custom alt text" %}
-This card includes an image with custom alt text.
+{% card title="POST /users" description="Create new user" %}
+Creates a new user with email and name.
 {% /card %}
-
 {% /column %}
+{% /step %}
 
-## Link Cards
-{% column cols=2 gap="md" %}
+{% step title="Testing & Deployment" %}
+Write tests and deploy your application.
 
-{% card title="Internal Link Card" description="Card that links internally" href="/internal-page" %}
-This card links to an internal page with default CTA text.
-{% /card %}
+{% accordion title="Unit Tests" defaultOpen=true %}
+```javascript {% filename="tests/users.test.js" %}
+const request = require('supertest');
+const app = require('../app');
 
-{% card title="External Link Card" description="Card that links externally" href="https://example.com" external=true ctaText="Visit Site" %}
-This card links to an external site with custom CTA text.
-{% /card %}
+describe('Users API', () => {
+  test('GET /users returns user list', async () => {
+    const response = await request(app)
+      .get('/api/users')
+      .expect(200);
+    
+    expect(Array.isArray(response.body)).toBe(true);
+  });
+});
+```
+{% /accordion %}
 
-{% card title="Card with Arrow" description="Shows arrow indicator" href="/somewhere" showArrow=true %}
-This card displays an arrow indicator.
-{% /card %}
+{% expand title="Deployment Configuration" %}
+```yaml {% filename="docker-compose.yml" %}
+version: '3.8'
+services:
+  app:
+    build: .
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - DATABASE_URL=postgresql://user:pass@db:5432/myapp
+  
+  db:
+    image: postgres:15
+    environment:
+      - POSTGRES_DB=myapp
+      - POSTGRES_USER=user
+      - POSTGRES_PASSWORD=pass
+```
+{% /expand %}
+{% /step %}
+{% /steps %}
 
-{% card title="External with Arrow" description="External link with arrow" href="https://github.com" external=true showArrow=true ctaText="View on GitHub" %}
-External link with both arrow and custom CTA.
-{% /card %}
+## Steps with Minimal Content
 
-{% /column %}
+{% steps %}
+{% step title="Quick Start" %}
+Get up and running in seconds.
+{% /step %}
 
-## Horizontal Layout Cards
-{% card title="Horizontal Card Layout" description="This card uses horizontal layout" horizontal=true %}
-This card demonstrates the horizontal layout option where content flows horizontally instead of vertically.
-{% /card %}
+{% step title="Configure" %}
+Set up your preferences and options.
+{% /step %}
 
-{% card title="Horizontal with Link" description="Horizontal card that's also a link" horizontal=true href="/horizontal-page" ctaText="Explore More" showArrow=true %}
-This horizontal card also functions as a clickable link with arrow indicator.
-{% /card %}
-
-## Complex Card Variations
-{% column cols=3 gap="sm" %}
-
-{% card title="Full Featured Card" description="Card with all attributes" image="/hero.jpg" imageAlt="Hero image" icon="star" href="https://example.com" external=true ctaText="Learn More" showArrow=true %}
-This card uses every available attribute to test full functionality.
-{% /card %}
-
-{% card title="Horizontal External" description="Horizontal external link" horizontal=true href="https://docs.example.com" external=true ctaText="Read Docs" %}
-Horizontal card linking to external documentation.
-{% /card %}
-
-{% card title="Image with Internal Link" description="Image card with internal navigation" image="/thumbnail.png" href="/details" showArrow=true %}
-Card with image that links internally and shows an arrow.
-{% /card %}
-
-{% /column %}
-
----
-
-# Callouts
-Preset definitions for callouts include: info, warning, error, success, tip, AND danger
-
-{% callout title="Information Callout" type="info" %}
-This is an info callout with blue styling
-{% /callout %}
-
-{% callout title="Warning Callout" type="warning" %}
-This is a warning callout with yellow/orange styling
-{% /callout %}
-
-{% callout title="Error Callout" type="error" %}
-This is an error callout with red styling
-{% /callout %}
-
-{% callout title="Success Callout" type="success" %}
-This is a success callout with green styling
-{% /callout %}
-
-{% callout title="Tip Callout" type="tip" %}
-This is a tip callout with helpful information
-{% /callout %}
-
-{% callout title="Danger Callout" type="danger" %}
-This is a danger callout for critical warnings
-{% /callout %}
-
-{% callout title="Default Callout" %}
-This callout has no type specified, should use default styling
-{% /callout %}
-
----
-
-## CodeGroup Tests
-
-{% codeGroup %}
-{% codeSnippet code="console.log('First snippet in group');" language="javascript" title="JavaScript Example" /%}
-{% codeSnippet code="print('Second snippet in group')" language="python" title="Python Example" /%}
-{% codeSnippet code="echo 'Third snippet in group'" language="bash" title="Bash Example" /%}
-{% /codeGroup %}
-
-{% codeGroup title="API Setup Examples" %}
-{% codeSnippet code="// Express.js setup\nconst express = require('express');\nconst app = express();\n\napp.get('/api/users', (req, res) => {\n  res.json({ users: [] });\n});\n\napp.listen(3000);" language="javascript" filename="server.js" /%}
-{% codeSnippet code="# FastAPI setup\nfrom fastapi import FastAPI\n\napp = FastAPI()\n\n@app.get('/api/users')\ndef get_users():\n    return {'users': []}\n\nif __name__ == '__main__':\n    import uvicorn\n    uvicorn.run(app, host='0.0.0.0', port=8000)" language="python" filename="main.py" /%}
-{% codeSnippet code="// Next.js API route\nexport default function handler(req, res) {\n  if (req.method === 'GET') {\n    res.status(200).json({ users: [] });\n  } else {\n    res.setHeader('Allow', ['GET']);\n    res.status(405).end('Method Not Allowed');\n  }\n}" language="javascript" filename="pages/api/users.js" /%}
-{% /codeGroup %}
-
-{% codeGroup title="Database Schemas" showLineNumbers=true %}
-{% codeSnippet code="-- PostgreSQL Schema\nCREATE TABLE users (\n  id SERIAL PRIMARY KEY,\n  email VARCHAR(255) UNIQUE NOT NULL,\n  name VARCHAR(100) NOT NULL,\n  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP\n);\n\nCREATE TABLE posts (\n  id SERIAL PRIMARY KEY,\n  title VARCHAR(200) NOT NULL,\n  content TEXT,\n  user_id INTEGER REFERENCES users(id),\n  published BOOLEAN DEFAULT false,\n  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP\n);" language="sql" filename="schema.sql" /%}
-{% codeSnippet code="// Prisma Schema\nmodel User {\n  id        Int      @id @default(autoincrement())\n  email     String   @unique\n  name      String\n  posts     Post[]\n  createdAt DateTime @default(now())\n\n  @@map(\"users\")\n}\n\nmodel Post {\n  id        Int      @id @default(autoincrement())\n  title     String\n  content   String?\n  published Boolean  @default(false)\n  author    User     @relation(fields: [authorId], references: [id])\n  authorId  Int\n  createdAt DateTime @default(now())\n\n  @@map(\"posts\")\n}" language="prisma" filename="schema.prisma" /%}
-{% codeSnippet code="// MongoDB Schema (Mongoose)\nconst mongoose = require('mongoose');\n\nconst userSchema = new mongoose.Schema({\n  email: {\n    type: String,\n    required: true,\n    unique: true\n  },\n  name: {\n    type: String,\n    required: true\n  },\n  createdAt: {\n    type: Date,\n    default: Date.now\n  }\n});\n\nconst postSchema = new mongoose.Schema({\n  title: {\n    type: String,\n    required: true\n  },\n  content: String,\n  published: {\n    type: Boolean,\n    default: false\n  },\n  author: {\n    type: mongoose.Schema.Types.ObjectId,\n    ref: 'User',\n    required: true\n  },\n  createdAt: {\n    type: Date,\n    default: Date.now\n  }\n});\n\nmodule.exports = {\n  User: mongoose.model('User', userSchema),\n  Post: mongoose.model('Post', postSchema)\n};" language="javascript" filename="models.js" /%}
-{% /codeGroup %}
-
-{% codeGroup title="Testing Examples" %}
-{% codeSnippet code="// Jest test\nconst { add } = require('./math');\n\ndescribe('Math functions', () => {\n  test('should add two numbers correctly', () => {\n    expect(add(2, 3)).toBe(5);\n    expect(add(-1, 1)).toBe(0);\n    expect(add(0, 0)).toBe(0);\n  });\n\n  test('should handle decimal numbers', () => {\n    expect(add(0.1, 0.2)).toBeCloseTo(0.3);\n  });\n});" language="javascript" filename="math.test.js" copyable=true /%}
-{% codeSnippet code="# pytest test\nimport pytest\nfrom math_utils import add\n\nclass TestMathFunctions:\n    def test_add_positive_numbers(self):\n        assert add(2, 3) == 5\n        \n    def test_add_negative_numbers(self):\n        assert add(-1, 1) == 0\n        \n    def test_add_zero(self):\n        assert add(0, 0) == 0\n        \n    def test_add_decimals(self):\n        result = add(0.1, 0.2)\n        assert abs(result - 0.3) < 1e-10" language="python" filename="test_math.py" /%}
-{% /codeGroup %}
+{% step title="Deploy" %}
+Launch your application to production.
+{% /step %}
+{% /steps %}
 
 ---
 
@@ -177,21 +376,51 @@ This accordion only has a title, using defaults for other attributes.
 
 ---
 
-# Break Components
+# Expand Components
 
-This is content before a default break.
+{% expand %}
+This expand component uses the default title and starts closed. Expand components are similar to accordions but have a simpler interface focused just on showing/hiding content.
+{% /expand %}
 
-{% break %}
+{% expand title="Custom Expand Title" %}
+This expand component has a custom title and demonstrates the basic expand/collapse functionality.
 
-This content comes after a level 3 break (default).
+You can include any content inside:
+- Lists
+- Code blocks  
+- Other components
 
-{% break level=1 %}
+## Headings work too
+More content to show the expand functionality.
+{% /expand %}
 
-This content comes after a level 1 break (should be minimal spacing).
+{% expand title="Open by Default" defaultOpen=true %}
+This expand component starts in the open state because defaultOpen is set to true.
 
-{% break level=5 %}
+```javascript
+// Code blocks work in expand components
+function example() {
+  return 'Expand components are great for optional content';
+}
+```
 
-This content comes after a level 5 break (should be maximum spacing).
+This is useful for content that should be visible by default but can still be collapsed.
+{% /expand %}
+
+{% expand title="Documentation Section" %}
+Expand components are perfect for:
+
+1. **FAQ sections** - Questions with expandable answers
+2. **Code examples** - Show/hide detailed implementation  
+3. **Additional information** - Optional details that don't clutter the main content
+4. **Troubleshooting steps** - Expandable help sections
+
+{% callout title="Pro Tip" type="tip" %}
+Use expand components to keep your documentation clean while providing access to detailed information when needed.
+{% /callout %}
+{% /expand %}
+
+---
 
 ---
 
@@ -207,8 +436,21 @@ This callout is nested inside an accordion which is inside a column.
 {% /callout %}
 
 {% codeGroup title="Code Group in Accordion" %}
-{% codeSnippet code="// First nested snippet\nfunction example1() {\n  return 'Code in accordion in column!';\n}" language="javascript" title="JavaScript" /%}
-{% codeSnippet code="# Second nested snippet\ndef example2():\n    return 'Python in accordion too!'" language="python" title="Python" /%}
+```javascript {% title="JavaScript" highlight="2,4" %}
+function example1() {
+  console.log('Starting function');
+  const result = 'Code in accordion in column!';
+  console.log('Function complete');
+  return result;
+}
+```
+```python {% title="Python" highlight="1,3,5" %}
+def example2():
+    print('Starting function')
+    result = 'Python in accordion too!'
+    print('Function complete')
+    return result
+```
 {% /codeGroup %}
 
 More content in the accordion.
@@ -220,14 +462,18 @@ This card is in the same column as the accordion above and includes a link.
 ## Heading in Card
 Cards support rich content and can be interactive.
 
-{% break level=2 %}
+{% expand title="Additional Details" %}
+This expand component is nested inside a card to test nested rendering.
+
+{% callout title="Nested in Card" type="info" %}
+Expand components work great inside cards for optional details.
+{% /callout %}
+{% /expand %}
 
 Content after a break inside the card.
 {% /card %}
 
 {% /column %}
-
-{% break level=4 %}
 
 ## All Callout Types in Columns
 
@@ -277,8 +523,6 @@ Callout inside accordion inside card inside column! This card also has href, cta
 {% /callout %}
 {% /accordion %}
 
-{% break level=3 %}
-
 More card content after the accordion and break.
 
 {% /card %}
@@ -289,17 +533,21 @@ More card content after the accordion and break.
 
 This document tests:
 - ✅ **Paragraph nodes** (custom Paragraph component)
-- ✅ **Heading nodes** (all levels with Heading component)  
+- ✅ **Heading nodes** (all levels with Heading component)
+- ✅ **Fence nodes** (code fences render as CodeSnippet with new attributes: language, filename, title, showLineNumbers, highlight, icon, content, info)
 - ✅ **Callout tags** (all 6 types: info, warning, error, success, tip, danger)
 - ✅ **Card tags** (all attributes: title, description, image, imageAlt, icon, href, ctaText, showArrow, external, horizontal)
-- ✅ **Break tags** (levels 1, 3, 5)
+
 - ✅ **Column tags** (1, 2, 3 columns with different gaps)
 - ✅ **Accordion tags** (default closed, default open, with icons)
-- ✅ **CodeSnippet tags** (all attributes: code, language, filename, title, showLineNumbers, copyable)
-- ✅ **CodeGroup tags** (container for multiple codeSnippets, title, showLineNumbers)
+- ✅ **Expand tags** (default closed, default open, custom titles)
+- ✅ **Steps tags** (step-by-step instructions container)
+- ✅ **Step tags** (individual steps with titles and rich content)
+- ✅ **CodeGroup tags** (container for multiple fence blocks, title)
 - ✅ **Card link functionality** (internal links, external links, CTA text, arrows)
 - ✅ **Card layout options** (horizontal vs vertical layouts)
-- ✅ **Code component variations** (different languages, with/without line numbers, copy functionality)
-- ✅ **Code organization patterns** (groups vs individual snippets)
-- ✅ **Complex nesting** (accordions in cards in columns, codeGroups in accordions)
+- ✅ **Code fence variations** (different languages, with/without line numbers, icons, content, info attributes)
+- ✅ **Line highlighting** (single lines, ranges, mixed patterns)
+- ✅ **Steps workflow patterns** (basic steps, advanced with rich content, minimal steps)
+- ✅ **Complex nesting** (accordions in cards in columns, codeGroups in accordions, expand in cards, steps with nested components)
 - ✅ **All attribute combinations** (defaults and custom values)
