@@ -1,8 +1,7 @@
 ---
 title: Delete Document 
-theme: dark
 description: Deletes a document from your Devscribe workspace
-openapi: DELETE https://api.devscribe.com/v1/documents/{id}
+openapi: DELETE /plants/{id}
 ---
 
 ## Parameters

@@ -1,8 +1,7 @@
 ---
-title: Create Document
-theme: dark
+title: Create Plant
 description: Creates a new document in your Devscribe workspace
-openapi: POST https://api.devscribe.com/v1/documents
+openapi: POST /plants
 ---
 
 ## Body Parameters
@@ -13,6 +12,7 @@ openapi: POST https://api.devscribe.com/v1/documents
 | `content` | string | Markdown content of the document |
 | `tags` | array[string] | Optional tags for organization |
 | `project_id` | string | Project to associate the document with |
+
 
 ## Example Request
 

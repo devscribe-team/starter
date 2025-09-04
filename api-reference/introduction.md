@@ -1,6 +1,5 @@
 ---
 title: API Reference Introduction
-theme: dark
 icon: book
 ---
 

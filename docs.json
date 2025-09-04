@@ -13,9 +13,11 @@
               ]
             },
             {
-              "group": "Essentials",
+              "group": "Quickstart",
               "pages": [
-                "essentials/guide"
+                "quickstart/guide",
+                "quickstart/docs-json",
+                "quickstart/openapi-json"
               ]
             }
           ]

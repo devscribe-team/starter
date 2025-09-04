@@ -1,8 +1,7 @@
 ---
-title: List Documents
-theme: dark
+title: Get Plants
 description: Retrieve a list of documents in your Devscribe workspace
-openapi: GET https://api.devscribe.com/v1/documents
+openapi: GET /plants
 ---
 
 ## Parameters

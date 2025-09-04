@@ -1,6 +1,5 @@
 ---
 title: Introduction
-theme: dark
 icon: rocket
 ---
 
