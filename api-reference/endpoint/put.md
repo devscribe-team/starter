@@ -11,8 +11,6 @@ num: 3
 |-----------|------|-------------|
 | `id` | string | Document identifier (path parameter) |
 
-## Example Request
-
 {% codeGroup %}
 ```bash {title="cURL"}
 curl -X PUT "https://api.devscribe.com/v1/documents/doc_01TESTGROUP" \
