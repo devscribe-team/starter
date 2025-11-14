@@ -1,11 +1,9 @@
 ---
 title: Introduction
+description: Welcome to DevScribe - the powerful documentation platform for developers.
 icon: rocket
 ---
 
-# Introduction
-
-Welcome to DevScribe - the powerful documentation platform for developers.
 
 ## Getting Started
 
@@ -16,13 +14,13 @@ This documentation will help you:
 - Build beautiful documentation
 - Deploy your docs
 
-{% callout title="Quick Start" %}
+
 Ready to dive in? Check out our [Quickstart Guide](/quickstart) to get up and running in minutes.
-{% /callout %}
+
 
 ## What is DevScribe?
 
-DevScribe is a modern documentation platform that makes it easy to create, maintain, and deploy beautiful documentation for your projects.
+Devscribe is a modern documentation platform that makes it easy to create, maintain, and deploy beautiful documentation for your projects.
 
 ### Key Features
 

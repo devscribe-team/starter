@@ -1,8 +1,8 @@
 ---
 title: Update Document
 description: Updates an existing document in your Devscribe workspace
-api: PUT /plants
-num: 3
+api: PUT /documents
+num: 2
 ---
 
 ## Parameters
@@ -11,28 +11,28 @@ num: 3
 |-----------|------|-------------|
 | `id` | string | Document identifier (path parameter) |
 
-{% codeGroup %}
-```bash {title="cURL"}
-curl -X PUT "https://api.devscribe.com/v1/documents/doc_01TESTGROUP" \
-  -H "Authorization: Bearer YOUR_API_KEY" \
-  -H "Content-Type: application/json" \
+<CodeGroup>
+  <CodeSnippet language="bash" title="cURL">
+  {`curl -X PUT "https://api.devscribe.com/v1/documents/doc_01TESTGROUP" \\
+  -H "Authorization: Bearer YOUR_API_KEY" \\
+  -H "Content-Type: application/json" \\
   -d '{
     "title": "From CodeGroup",
     "tags": ["group", "test"]
-  }'
-```
+  }'`}
+  </CodeSnippet>
 
-```javascript {title="JavaScript"}
-await fetch("https://api.devscribe.com/v1/documents/doc_01TESTGROUP", {
-  method: "PUT",
-  headers: {
-    Authorization: "Bearer YOUR_API_KEY",
-    "Content-Type": "application/json",
-  },
-  body: JSON.stringify({ title: "From CodeGroup", tags: ["group", "test"] }),
-});
-```
-{% /codeGroup %}
+  <CodeSnippet language="javascript" title="JavaScript">
+  {`await fetch("https://api.devscribe.com/v1/documents/doc_01TESTGROUP", {
+    method: "PUT",
+    headers: {
+      Authorization: "Bearer YOUR_API_KEY",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ title: "From CodeGroup", tags: ["group", "test"] }),
+  });`}
+  </CodeSnippet>
+</CodeGroup>
 
 ```bash
 curl -X PUT "https://api.devscribe.com/v1/documents/doc_01HZXYABCD" \
@@ -44,9 +44,9 @@ curl -X PUT "https://api.devscribe.com/v1/documents/doc_01HZXYABCD" \
   }'
 ```
 
-{% codeGroup %}
-```python {title="Python"}
-import requests
+<CodeGroup>
+  <CodeSnippet language="python" title="Python">
+  {`import requests
 
 url = "https://api.devscribe.com/v1/documents/doc_01TESTGROUP2"
 headers = {
@@ -54,19 +54,19 @@ headers = {
     "Content-Type": "application/json",
 }
 payload = {"title": "From Second Group", "tags": ["group2", "test"]}
-requests.put(url, json=payload, headers=headers)
-```
+requests.put(url, json=payload, headers=headers)`}
+  </CodeSnippet>
 
-```bash {title="cURL"}
-curl -X PUT "https://api.devscribe.com/v1/documents/doc_01TESTGROUP2" \
-  -H "Authorization: Bearer YOUR_API_KEY" \
-  -H "Content-Type: application/json" \
+  <CodeSnippet language="bash" title="cURL">
+  {`curl -X PUT "https://api.devscribe.com/v1/documents/doc_01TESTGROUP2" \\
+  -H "Authorization: Bearer YOUR_API_KEY" \\
+  -H "Content-Type: application/json" \\
   -d '{
     "title": "From Second Group",
     "tags": ["group2", "test"]
-  }'
-```
-{% /codeGroup %}
+  }'`}
+  </CodeSnippet>
+</CodeGroup>
 
 ## Example Response
 

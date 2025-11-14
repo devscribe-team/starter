@@ -19,20 +19,20 @@ Version: OpenAPI 3.x (typical fields — `info`, `servers`, `paths`, `components
 
 ## Enabling it on a page
 
-In your endpoint markdown (e.g., `api-reference/endpoint/put.md`), add frontmatter like:
+In your endpoint markdown (e.g., `api-reference/endpoint/put.mdx`), add frontmatter like:
 
 ```md
 ---
 title: Update Document
 description: Updates an existing document
-openapi: "PUT /plants"  # METHOD + route must match your spec
+openapi: "PUT /documents"  # METHOD + route must match your spec
 ---
 ```
 
 How matching works:
 
 - The system reads `src/app/(pages)/openapi.json` at build time.
-- It matches the page’s `openapi` frontmatter to `paths["/plants"].put` in the spec.
+- It matches the page’s `openapi` frontmatter to `paths["/documents"].put` in the spec.
 
 If there’s no match or the spec is missing, the page gracefully falls back and logs a warning to the server console.
 
@@ -63,7 +63,7 @@ You don’t have to use `openapi.json`. You have two alternatives:
     ---
     title: Update Document
     description: Updates an existing document
-    api: "PUT /plants"
+    api: "PUT /documents"
     ---
     ```
 
@@ -89,9 +89,9 @@ You don’t have to use `openapi.json`. You have two alternatives:
   "info": { "title": "My API", "version": "1.0.0" },
   "servers": [{ "url": "https://api.example.com/v1" }],
   "paths": {
-    "/plants": {
+    "/documents": {
       "put": {
-        "description": "Update a plant",
+        "description": "Update a document",
         "security": [{ "bearerAuth": [] }],
         "parameters": [
           { "name": "id", "in": "path", "required": true, "schema": { "type": "string" } },
@@ -156,11 +156,11 @@ You don’t have to use `openapi.json`. You have two alternatives:
 - For pages using `api:` (lightweight mode)
   - You can control how many code items (code groups and/or code fences) are moved to the right sidebar using `num`.
   - The first N code items by source order go to the sidebar; the rest remain in the main content.
-  - Code groups (`{% codeGroup %}...{% /codeGroup %}`) count as one item.
+  - Code groups (`<CodeGroup>...</CodeGroup>`) count as one item.
 
 ```md
 ---
-api: "PUT /plants"
+api: "PUT /documents"
 num: 2
 ---
 ```

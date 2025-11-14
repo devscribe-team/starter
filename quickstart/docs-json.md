@@ -67,16 +67,16 @@ icon: navigation
 
 ### Pages
 
-- Each entry is a page path (without `.md`) relative to `src/app/(pages)`.
+- Each entry is a page path (without `.mdx`) relative to `src/app/(pages)`.
 - The order of this array determines:
   - Left sidebar ordering
   - Previous/Next navigation (computed from this order)
-- The file must exist as `src/app/(pages)/<page>.md`.
+- The file must exist as `src/app/(pages)/<page>.mdx`.
 - Titles come from the page frontmatter (`title:`). If omitted, a title is derived from the filename.
 
 ## Adding a new page to `docs.json`
 
-1. Create a markdown file under `src/app/(pages)` (e.g., `src/app/(pages)/quickstart/my-page.md`).
+1. Create a markdown file under `src/app/(pages)` (e.g., `src/app/(pages)/quickstart/my-page.mdx`).
 2. Add frontmatter at the top:
 
 ```md
@@ -86,7 +86,7 @@ description: Short description shown below the title
 ---
 ```
 
-3. Add the page path (without `.md`) to the appropriate `pages` array in `docs.json`:
+3. Add the page path (without `.mdx`) to the appropriate `pages` array in `docs.json`:
 
 ```json
 {
@@ -107,8 +107,8 @@ description: Short description shown below the title
 
 If a page represents an API endpoint, include one of the following in the frontmatter:
 
-- `openapi: "GET /plants"` (preferred)
-- `api: "GET /plants"`
+- `openapi: "GET /documents"` (preferred)
+- `api: "GET /documents"`
 
 This enables API‑aware UI (method badge, try‑it button, request/response details) and determines HTTP method visualization throughout the navigation. The method color mapping is handled internally.
 
@@ -144,7 +144,7 @@ Add external links under `navigation.global.anchors`:
 
 ## Common pitfalls
 
-- The `pages` path must match the markdown path without the `.md` extension.
+- The `pages` path must match the markdown path without the `.mdx` extension.
 - Ordering in `pages` controls Previous/Next; if navigation feels wrong, check order.
 - Titles missing in frontmatter will be auto‑generated from filenames (may not look polished).
 - Invalid `icon` names won’t render; use keys defined in `src/lib/sidebar-utils.ts`.

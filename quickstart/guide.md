@@ -18,17 +18,17 @@ A practical reference to core Markdown syntax for writing docs.
 
 ### Headers
 
-{% tabGroup %}
-  {% tab title="Preview" %}
+<TabGroup>
+  <Tab title="Preview">
   # H1 Header
   ## H2 Header
   ### H3 Header
   #### H4 Header
   ##### H5 Header
   ###### H6 Header
-  {% /tab %}
+  </Tab>
 
-  {% tab title="Syntax" %}
+  <Tab title="Syntax">
   ```markdown
   # H1 Header
   ## H2 Header
@@ -37,23 +37,23 @@ A practical reference to core Markdown syntax for writing docs.
   ##### H5 Header
   ###### H6 Header
   ```
-  {% /tab %}
-{% /tabGroup %}
+  </Tab>
+</TabGroup>
 
 ## Lists
 
 ### Unordered
 
-{% tabGroup %}
-  {% tab title="Preview" %}
+<TabGroup>
+  <Tab title="Preview">
   - Item 1
   - Item 2
     - Nested item
     - Another nested item
   - Item 3
-  {% /tab %}
+  </Tab>
 
-  {% tab title="Syntax" %}
+  <Tab title="Syntax">
   ```markdown
   - Item 1
   - Item 2
@@ -61,61 +61,61 @@ A practical reference to core Markdown syntax for writing docs.
     - Another nested item
   - Item 3
   ```
-  {% /tab %}
-{% /tabGroup %}
+  </Tab>
+</TabGroup>
 
 ### Ordered
 
-{% tabGroup %}
-  {% tab title="Preview" %}
+<TabGroup>
+  <Tab title="Preview">
   1. First item
   2. Second item
   3. Third item
-  {% /tab %}
+  </Tab>
 
-  {% tab title="Syntax" %}
+  <Tab title="Syntax">
   ```markdown
   1. First item
   2. Second item
   3. Third item
   ```
-  {% /tab %}
-{% /tabGroup %}
+  </Tab>
+</TabGroup>
 
 ## Links and Images
 
 ### Links
 
-{% tabGroup %}
-  {% tab title="Preview" %}
+<TabGroup>
+  <Tab title="Preview">
   [Devscribe](https://devscribe.com)  
   [Devscribe with title](https://devscribe.com "Docs Home")
-  {% /tab %}
+  </Tab>
 
-  {% tab title="Syntax" %}
+  <Tab title="Syntax">
   ```markdown
   [Devscribe](https://devscribe.com)
   [Devscribe with title](https://devscribe.com "Docs Home")
   ```
-  {% /tab %}
-{% /tabGroup %}
+  </Tab>
+</TabGroup>
 
 ### Images
 
-{% tabGroup %}
-  {% tab title="Preview" %}
+<TabGroup>
+  <Tab title="Preview">
   ![Devscribe icon](/devscribe-logo.png)
 
   ![Devscribe logo](/devscribe-logo.png "Devscribe Logo")
-  {% /tab %}
+  </Tab>
 
-  {% tab title="Syntax" %}
+  <Tab title="Syntax">
   ```markdown
   ![Devscribe icon](/devscribe-logo.png)
   ![Devscribe logo](/devscribe-logo.png "Devscribe Logo")
   ```
-  {% /tab %}
-{% /tabGroup %}
+  </Tab>
+</TabGroup>
 
 ## Code
 
@@ -125,115 +125,118 @@ Use single backticks for `inline code`.
 ### Basic Code Blocks
 Use triple backticks with language specification:
 
-{% tabGroup %}
-  {% tab title="Preview" %}
+<TabGroup>
+  <Tab title="Preview">
   ```ts
   console.log('Hello, world!')
   ```
-  {% /tab %}
+  </Tab>
 
-  {% tab title="Syntax" %}
+  <Tab title="Syntax">
   ````markdown
   ```ts
   console.log('Hello, world!')
   ```
   ````
-  {% /tab %}
-{% /tabGroup %}
+  </Tab>
+</TabGroup>
 
-### Code Blocks with options
-
-{% tabGroup %}
-  {% tab title="Preview" %}
-  ```ts {% title="Auth Helper" filename="auth.ts" showLineNumbers=true highlight="2,5-7" %}
-  export function getToken() {
-    return process.env.TOKEN
-  }
-
-  export function isLoggedIn() {
-    return Boolean(getToken())
-  }
-  ```
-  {% /tab %}
-
-  {% tab title="Syntax" %}
-  ````markdown
-  ```ts {% title="Auth Helper" filename="auth.ts" showLineNumbers=true highlight="2,5-7" %}
-  export function getToken() {
-    return process.env.TOKEN
-  }
-
-  export function isLoggedIn() {
-    return Boolean(getToken())
-  }
-  ```
-  ````
-  {% /tab %}
-{% /tabGroup %}
 
 ---
 
-# Custom Markdoc Components
+# Custom MDX Components
 
-Custom Markdoc components supported by this repo
+Custom MDX components supported by this repo
 
 Tip: Components can be nested (e.g., a callout inside a card, code fences inside tabs).
+
+
+
+### Code Blocks with options
+
+<TabGroup>
+  <Tab title="Preview">
+  <CodeSnippet language="typescript" title="Auth Helper" showLineNumbers={true} highlight="2,5-7">
+  {`export function getToken() {
+    return process.env.TOKEN
+  }
+
+  export function isLoggedIn() {
+    return Boolean(getToken())
+  }`}
+  </CodeSnippet>
+  </Tab>
+
+  <Tab title="Syntax">
+  ````markdown
+  <CodeSnippet language="typescript" title="Auth Helper" showLineNumbers={true} highlight="2,5-7">
+  {`export function getToken() {
+    return process.env.TOKEN
+  }
+
+  export function isLoggedIn() {
+    return Boolean(getToken())
+  }`}
+  </CodeSnippet>
+  ````
+  </Tab>
+</TabGroup>
 
 ## Callouts
 
 Supported types: `info`, `warning`, `error`, `success`, `tip`, `danger`.
 
-{% tabGroup %}
-  {% tab title="Preview" className="text-left" %}
-{% callout type="info" %}
+<TabGroup>
+  <Tab title="Preview" className="text-left">
+<Callout type="info">
 Informational message about a feature.
-{% /callout %}
-{% callout type="warning" %}
+</Callout>
+<Callout type="warning">
 Heads up about a potentially risky action.
-{% /callout %}
-{% callout type="error" %}
+</Callout>
+<Callout type="error">
 Something went wrong and needs attention.
-{% /callout %}
-{% callout type="success" %}
+</Callout>
+<Callout type="success">
 Operation completed successfully.
-{% /callout %}
-{% callout type="tip" %}
+</Callout>
+<Callout type="tip">
 Pro tip to improve your workflow.
-{% /callout %}
-{% callout type="danger" %}
+</Callout>
+<Callout type="danger">
 Destructive action. Proceed with extreme caution.
-{% /callout %}
-  {% /tab %}
+</Callout>
+  </Tab>
 
-  {% tab title="Syntax" %}
+  <Tab title="Syntax">
   ````markdown
-  {% callout type="info" %}
+  <Callout type="info">
   Informational message about a feature.
-  {% /callout %}
-  {% callout type="warning" %}
+  </Callout>
+  <Callout type="warning">
   Heads up about a potentially risky action.
-  {% /callout %}
-  {% callout type="error" %}
+  </Callout>
+  <Callout type="error">
   Something went wrong and needs attention.
-  {% /callout %}
-  {% callout type="success" %}
+  </Callout>
+  <Callout type="success">
   Operation completed successfully.
-  {% /callout %}
-  {% callout type="tip" %}
+  </Callout>
+  <Callout type="tip">
   Pro tip to improve your workflow.
-  {% /callout %}
-  {% callout type="danger" %}
+  </Callout>
+  <Callout type="danger">
   Destructive action. Proceed with extreme caution.
-  {% /callout %}
+  </Callout>
   ````
-  {% /tab %}
-{% /tabGroup %}
+  </Tab>
+</TabGroup>
 
 ### Callouts with Rich Content
 
-{% tabGroup %}
-  {% tab title="Preview" %}
-    {% callout type="info" %}
+<TabGroup>
+  <Tab title="Preview">
+    <Callout type="info">
   You can include code blocks in callouts:
 
   ```javascript
@@ -244,20 +247,20 @@ Destructive action. Proceed with extreme caution.
   - Item 1
   - Item 2
   - Item 3
-  {% /callout %}
+  </Callout>
 
-  {% callout type="warning" %}
+  <Callout type="warning">
   ### Heading in Callout
 
   This callout contains a heading and multiple paragraphs.
 
   This is the second paragraph with **bold text** and *italic text*.
-  {% /callout %}
-  {% /tab %}
+  </Callout>
+  </Tab>
 
-  {% tab title="Syntax" %}
+  <Tab title="Syntax">
   ````markdown
-  {% callout type="info" %}
+  <Callout type="info">
   You can include code blocks in callouts:
 
   ```javascript
@@ -268,136 +271,136 @@ Destructive action. Proceed with extreme caution.
   - Item 1
   - Item 2
   - Item 3
-  {% /callout %}
+  </Callout>
 
-  {% callout type="warning" %}
+  <Callout type="warning">
   ### Heading in Callout
 
   This callout contains a heading and multiple paragraphs.
 
   This is the second paragraph with **bold text** and *italic text*.
-  {% /callout %}
+  </Callout>
   ````
-  {% /tab %}
-{% /tabGroup %}
+  </Tab>
+</TabGroup>
 
 ## Cards
 
 ### Basic Card Examples
 
-{% tabGroup %}
-  {% tab title="Preview" %}
-  {% card title="Simple Card" description="This is a basic card with title and description" %}
+<TabGroup>
+  <Tab title="Preview">
+  <Card title="Simple Card" description="This is a basic card with title and description">
   Basic card content goes here. This card uses the default attributes.
-  {% /card %}
+  </Card>
 
-  {% card title="Card with Icon" description="This card demonstrates the icon and showIcon attributes" icon="star" %}
+  <Card title="Card with Icon" description="This card demonstrates the icon and showIcon attributes" icon="star">
   This card includes an icon. The icon name should be from Lucide React.
-  {% /card %}
+  </Card>
 
-  {% card title="Card without Icon" description="This card has showIcon set to false" icon="user" showIcon=false %}
+  <Card title="Card without Icon" description="This card has showIcon set to false" icon="user" showIcon={false}>
   Even though an icon is specified, it won't be displayed because showIcon is false.
-  {% /card %}
-  {% /tab %}
+  </Card>
+  </Tab>
 
-  {% tab title="Syntax" %}
+  <Tab title="Syntax">
   ````markdown
-  {% card title="Simple Card" description="This is a basic card with title and description" %}
+  <Card title="Simple Card" description="This is a basic card with title and description">
   Basic card content goes here. This card uses the default attributes.
-  {% /card %}
+  </Card>
 
 
-  {% card title="Card with Icon" description="This card demonstrates the icon and showIcon attributes" icon="star" %}
+  <Card title="Card with Icon" description="This card demonstrates the icon and showIcon attributes" icon="star">
   This card includes an icon. The icon name should be from Lucide React.
-  {% /card %}
+  </Card>
 
 
-  {% card title="Card without Icon" description="This card has showIcon set to false" icon="user" showIcon=false %}
+  <Card title="Card without Icon" description="This card has showIcon set to false" icon="user" showIcon={false}>
   Even though an icon is specified, it won't be displayed because showIcon is false.
-  {% /card %}
+  </Card>
   ````
-  {% /tab %}
-{% /tabGroup %}
+  </Tab>
+</TabGroup>
 
 ### Card Layout Options
 
-{% tabGroup %}
-  {% tab title="Preview" %}
-  {% card title="Horizontal Card" description="This card uses horizontal layout" icon="layout" horizontal=true %}
+<TabGroup>
+  <Tab title="Preview">
+  <Card title="Horizontal Card" description="This card uses horizontal layout" icon="layout" horizontal={true}>
   This card demonstrates the horizontal layout option where the icon appears on the left and content on the right, similar to a callout.
 
   You can include rich content in horizontal cards:
   - Lists work great
   - Code blocks too
   - Any nested content
-  {% /card %}
+  </Card>
 
-  {% card title="Vertical Card" description="This is the default vertical layout" icon="layers" %}
+  <Card title="Vertical Card" description="This is the default vertical layout" icon="layers">
   This card uses the default vertical layout where content flows from top to bottom.
 
   ### Heading in Card
   Cards support rich content including headings, paragraphs, and other components.
-  {% /card %}
-  {% /tab %}
+  </Card>
+  </Tab>
 
-  {% tab title="Syntax" %}
+  <Tab title="Syntax">
   ````markdown
-  {% card title="Horizontal Card" description="This card uses horizontal layout" icon="layout" horizontal=true %}
+  <Card title="Horizontal Card" description="This card uses horizontal layout" icon="layout" horizontal={true}>
   This card demonstrates the horizontal layout option where the icon appears on the left and content on the right, similar to a callout.
 
   You can include rich content in horizontal cards:
   - Lists work great
   - Code blocks too
   - Any nested content
-  {% /card %}
+  </Card>
 
 
-  {% card title="Vertical Card" description="This is the default vertical layout" icon="layers" %}
+  <Card title="Vertical Card" description="This is the default vertical layout" icon="layers">
   This card uses the default vertical layout where content flows from top to bottom.
 
   ### Heading in Card
   Cards support rich content including headings, paragraphs, and other components.
-  {% /card %}
+  </Card>
   ````
-  {% /tab %}
-{% /tabGroup %}
+  </Tab>
+</TabGroup>
 
 ### Clickable Cards
 
-{% tabGroup %}
-  {% tab title="Preview" %}
-  {% card title="Linked Card" description="This entire card is clickable" icon="external-link" href="https://example.com" %}
+<TabGroup>
+  <Tab title="Preview">
+  <Card title="Linked Card" description="This entire card is clickable" icon="external-link" href="https://example.com">
   When the href attribute is provided, the entire card becomes clickable and will navigate to the specified URL.
 
   Click anywhere on this card to test the link functionality.
-  {% /card %}
+  </Card>
 
-  {% card title="Internal Link Card" description="Card linking to internal page" icon="file-text" href="/introduction" %}
+  <Card title="Internal Link Card" description="Card linking to internal page" icon="file-text" href="/introduction">
   This card links to an internal page. The href can be any valid URL - external or internal.
-  {% /card %}
-  {% /tab %}
+  </Card>
+  </Tab>
 
-  {% tab title="Syntax" %}
+  <Tab title="Syntax">
   ````markdown
-  {% card title="Linked Card" description="This entire card is clickable" icon="external-link" href="https://example.com" %}
+  <Card title="Linked Card" description="This entire card is clickable" icon="external-link" href="https://example.com">
   When the href attribute is provided, the entire card becomes clickable and will navigate to the specified URL.
 
   Click anywhere on this card to test the link functionality.
-  {% /card %}
+  </Card>
 
 
-  {% card title="Internal Link Card" description="Card linking to internal page" icon="file-text" href="/introduction" %}
+  <Card title="Internal Link Card" description="Card linking to internal page" icon="file-text" href="/introduction">
   This card links to an internal page. The href can be any valid URL - external or internal.
-  {% /card %}
+  </Card>
   ````
-  {% /tab %}
-{% /tabGroup %}
+  </Tab>
+</TabGroup>
 
 ### Cards with Rich Content
 
-{% tabGroup %}
-  {% tab title="Preview" %}
-  {% card title="Card with Code" description="Demonstrating code blocks in cards" icon="code" %}
+<TabGroup>
+  <Tab title="Preview">
+  <Card title="Card with Code" description="Demonstrating code blocks in cards" icon="code">
   Cards can contain code examples:
 
   ```javascript
@@ -410,9 +413,9 @@ Destructive action. Proceed with extreme caution.
   ```
 
   The code formatting is preserved inside the card component.
-  {% /card %}
+  </Card>
 
-  {% card title="Card with Lists" description="Cards supporting various content types" icon="list" %}
+  <Card title="Card with Lists" description="Cards supporting various content types" icon="list">
   Cards work well with different content types:
 
   ### Ordered Lists
@@ -427,12 +430,12 @@ Destructive action. Proceed with extreme caution.
 
   ### Mixed Content
   You can combine text, lists, and other elements seamlessly.
-  {% /card %}
-  {% /tab %}
+  </Card>
+  </Tab>
 
-  {% tab title="Syntax" %}
+  <Tab title="Syntax">
   ````markdown
-  {% card title="Card with Code" description="Demonstrating code blocks in cards" icon="code" %}
+  <Card title="Card with Code" description="Demonstrating code blocks in cards" icon="code">
   Cards can contain code examples:
 
   ```javascript
@@ -445,10 +448,10 @@ Destructive action. Proceed with extreme caution.
   ```
 
   The code formatting is preserved inside the card component.
-  {% /card %}
+  </Card>
 
 
-  {% card title="Card with Lists" description="Cards supporting various content types" icon="list" %}
+  <Card title="Card with Lists" description="Cards supporting various content types" icon="list">
   Cards work well with different content types:
 
   ### Ordered Lists
@@ -463,70 +466,70 @@ Destructive action. Proceed with extreme caution.
 
   ### Mixed Content
   You can combine text, lists, and other elements seamlessly.
-  {% /card %}
+  </Card>
   ````
-  {% /tab %}
-{% /tabGroup %}
+  </Tab>
+</TabGroup>
 
 ## CardGroups
 
 ### Basic CardGroup Examples
 
-{% tabGroup %}
-  {% tab title="Preview" %}
-  {% cardGroup cols=2 gap="md" %}
-  {% card title="Feature 1" description="Core functionality" icon="zap" %}
+<TabGroup>
+  <Tab title="Preview">
+  <CardGroup cols={2} gap="md">
+  <Card title="Feature 1" description="Core functionality" icon="zap">
   Fast and reliable performance with optimized algorithms.
-  {% /card %}
+  </Card>
 
-  {% card title="Feature 2" description="Easy integration" icon="plug" %}
+  <Card title="Feature 2" description="Easy integration" icon="plug">
   Simple APIs that integrate with your existing workflow.
-  {% /card %}
+  </Card>
 
-  {% card title="Feature 3" description="Secure by default" icon="shield" %}
+  <Card title="Feature 3" description="Secure by default" icon="shield">
   Built-in security features to protect your data.
-  {% /card %}
+  </Card>
 
-  {% card title="Feature 4" description="Scalable architecture" icon="trending-up" %}
+  <Card title="Feature 4" description="Scalable architecture" icon="trending-up">
   Scales automatically to handle increased demand.
-  {% /card %}
-  {% /cardGroup %}
-  {% /tab %}
+  </Card>
+  </CardGroup>
+  </Tab>
 
-  {% tab title="Syntax" %}
+  <Tab title="Syntax">
   ````markdown
-  {% cardGroup cols=2 gap="md" %}
-  {% card title="Feature 1" description="Core functionality" icon="zap" %}
+  <CardGroup cols={2} gap="md">
+  <Card title="Feature 1" description="Core functionality" icon="zap">
   Fast and reliable performance with optimized algorithms.
-  {% /card %}
+  </Card>
 
 
-  {% card title="Feature 2" description="Easy integration" icon="plug" %}
+  <Card title="Feature 2" description="Easy integration" icon="plug">
   Simple APIs that integrate with your existing workflow.
-  {% /card %}
+  </Card>
 
 
-  {% card title="Feature 3" description="Secure by default" icon="shield" %}
+  <Card title="Feature 3" description="Secure by default" icon="shield">
   Built-in security features to protect your data.
-  {% /card %}
+  </Card>
 
 
-  {% card title="Feature 4" description="Scalable architecture" icon="trending-up" %}
+  <Card title="Feature 4" description="Scalable architecture" icon="trending-up">
   Scales automatically to handle increased demand.
-  {% /card %}
-  {% /cardGroup %}
+  </Card>
+  </CardGroup>
   ````
-  {% /tab %}
-{% /tabGroup %}
+  </Tab>
+</TabGroup>
 
 ### CardGroup with Different Column Layouts
 
 #### Single Column Layout
 
-{% tabGroup %}
-  {% tab title="Preview" %}
-  {% cardGroup cols=1 gap="lg" %}
-  {% card title="Full Width Card" description="This card spans the full width" icon="maximize" %}
+<TabGroup>
+  <Tab title="Preview">
+  <CardGroup cols={1} gap="lg">
+  <Card title="Full Width Card" description="This card spans the full width" icon="maximize">
   In a single column layout, cards take up the full available width, making them perfect for detailed content.
 
   ```javascript
@@ -535,21 +538,21 @@ Destructive action. Proceed with extreme caution.
     return <div className="full-width">Content here</div>;
   };
   ```
-  {% /card %}
+  </Card>
 
-  {% card title="Another Full Width Card" description="Second card in single column" icon="square" %}
+  <Card title="Another Full Width Card" description="Second card in single column" icon="square">
   This layout is ideal for:
   - Detailed explanations
   - Code examples that need space
   - Step-by-step instructions
-  {% /card %}
-  {% /cardGroup %}
-  {% /tab %}
+  </Card>
+  </CardGroup>
+  </Tab>
 
-  {% tab title="Syntax" %}
+  <Tab title="Syntax">
   ````markdown
-  {% cardGroup cols=1 gap="lg" %}
-  {% card title="Full Width Card" description="This card spans the full width" icon="maximize" %}
+  <CardGroup cols={1} gap="lg">
+  <Card title="Full Width Card" description="This card spans the full width" icon="maximize">
   In a single column layout, cards take up the full available width, making them perfect for detailed content.
 
   ```javascript
@@ -558,87 +561,87 @@ Destructive action. Proceed with extreme caution.
     return <div className="full-width">Content here</div>;
   };
   ```
-  {% /card %}
+  </Card>
 
-  {% card title="Another Full Width Card" description="Second card in single column" icon="square" %}
+  <Card title="Another Full Width Card" description="Second card in single column" icon="square">
   This layout is ideal for:
   - Detailed explanations
   - Code examples that need space
   - Step-by-step instructions
-  {% /card %}
-  {% /cardGroup %}
+  </Card>
+  </CardGroup>
   ````
-  {% /tab %}
-{% /tabGroup %}
+  </Tab>
+</TabGroup>
 
 #### Three Column Layout
 
-{% tabGroup %}
-  {% tab title="Preview" %}
-  {% cardGroup cols=3 gap="sm" %}
-  {% card title="Quick Tip 1" description="Compact design" icon="lightbulb" %}
+<TabGroup>
+  <Tab title="Preview">
+  <CardGroup cols={3} gap="sm">
+  <Card title="Quick Tip 1" description="Compact design" icon="lightbulb">
   Use small gaps for compact layouts.
-  {% /card %}
+  </Card>
 
-  {% card title="Quick Tip 2" description="Performance" icon="gauge" %}
+  <Card title="Quick Tip 2" description="Performance" icon="gauge">
   Optimize your components for speed.
-  {% /card %}
+  </Card>
 
-  {% card title="Quick Tip 3" description="Accessibility" icon="accessibility" %}
+  <Card title="Quick Tip 3" description="Accessibility" icon="accessibility">
   Always consider accessibility in design.
-  {% /card %}
+  </Card>
 
-  {% card title="Quick Tip 4" description="User Experience" icon="users" %}
+  <Card title="Quick Tip 4" description="User Experience" icon="users">
   Focus on user-centered design principles.
-  {% /card %}
+  </Card>
 
-  {% card title="Quick Tip 5" description="Mobile First" icon="smartphone" %}
+  <Card title="Quick Tip 5" description="Mobile First" icon="smartphone">
   Design for mobile devices first.
-  {% /card %}
+  </Card>
 
-  {% card title="Quick Tip 6" description="Testing" icon="check-circle" %}
+  <Card title="Quick Tip 6" description="Testing" icon="check-circle">
   Test your components thoroughly.
-  {% /card %}
-  {% /cardGroup %}
-  {% /tab %}
+  </Card>
+  </CardGroup>
+  </Tab>
 
-  {% tab title="Syntax" %}
+  <Tab title="Syntax">
   ````markdown
-  {% cardGroup cols=3 gap="sm" %}
-  {% card title="Quick Tip 1" description="Compact design" icon="lightbulb" %}
+  <CardGroup cols={3} gap="sm">
+  <Card title="Quick Tip 1" description="Compact design" icon="lightbulb">
   Use small gaps for compact layouts.
-  {% /card %}
+  </Card>
 
-  {% card title="Quick Tip 2" description="Performance" icon="gauge" %}
+  <Card title="Quick Tip 2" description="Performance" icon="gauge">
   Optimize your components for speed.
-  {% /card %}
+  </Card>
 
-  {% card title="Quick Tip 3" description="Accessibility" icon="accessibility" %}
+  <Card title="Quick Tip 3" description="Accessibility" icon="accessibility">
   Always consider accessibility in design.
-  {% /card %}
+  </Card>
 
-  {% card title="Quick Tip 4" description="User Experience" icon="users" %}
+  <Card title="Quick Tip 4" description="User Experience" icon="users">
   Focus on user-centered design principles.
-  {% /card %}
+  </Card>
 
-  {% card title="Quick Tip 5" description="Mobile First" icon="smartphone" %}
+  <Card title="Quick Tip 5" description="Mobile First" icon="smartphone">
   Design for mobile devices first.
-  {% /card %}
+  </Card>
 
-  {% card title="Quick Tip 6" description="Testing" icon="check-circle" %}
+  <Card title="Quick Tip 6" description="Testing" icon="check-circle">
   Test your components thoroughly.
-  {% /card %}
-  {% /cardGroup %}
+  </Card>
+  </CardGroup>
   ````
-  {% /tab %}
-{% /tabGroup %}
+  </Tab>
+</TabGroup>
 
 ### CardGroup with Mixed Content
 
-{% tabGroup %}
-  {% tab title="Preview" %}
-  {% cardGroup cols=2 gap="md" %}
-  {% card title="API Documentation" description="Complete API reference" icon="book" href="/api-reference/introduction" %}
+<TabGroup>
+  <Tab title="Preview">
+  <CardGroup cols={2} gap="md">
+  <Card title="API Documentation" description="Complete API reference" icon="book" href="/api-reference/introduction">
   ### Getting Started
 
   Our API provides easy access to all platform features:
@@ -653,9 +656,9 @@ Destructive action. Proceed with extreme caution.
   - JSON responses
   - Rate limiting
   - Comprehensive documentation
-  {% /card %}
+  </Card>
 
-  {% card title="SDK Integration" description="Multiple language support" icon="code" %}
+  <Card title="SDK Integration" description="Multiple language support" icon="code">
   ### Supported Languages
 
   We provide SDKs for popular programming languages:
@@ -669,26 +672,26 @@ Destructive action. Proceed with extreme caution.
   import { APIClient } from '@our-platform/sdk';
   const client = new APIClient('your-api-key');
   ```
-  {% /card %}
+  </Card>
 
-  {% card title="Community" description="Join our developer community" icon="users" horizontal=true %}
+  <Card title="Community" description="Join our developer community" icon="users" horizontal={true}>
   Connect with other developers, share experiences, and get help with integration challenges.
 
   Visit our Discord server or GitHub discussions.
-  {% /card %}
+  </Card>
 
-  {% card title="Support" description="Get help when you need it" icon="help-circle" horizontal=true %}
+  <Card title="Support" description="Get help when you need it" icon="help-circle" horizontal={true}>
   Our support team is available 24/7 to help with any questions or issues you might encounter.
 
   Email us or open a support ticket.
-  {% /card %}
-  {% /cardGroup %}
-  {% /tab %}
+  </Card>
+  </CardGroup>
+  </Tab>
 
-  {% tab title="Syntax" %}
+  <Tab title="Syntax">
   ````markdown
-  {% cardGroup cols=2 gap="md" %}
-  {% card title="API Documentation" description="Complete API reference" icon="book" href="/api-reference/introduction" %}
+  <CardGroup cols={2} gap="md">
+  <Card title="API Documentation" description="Complete API reference" icon="book" href="/api-reference/introduction">
   ### Getting Started
 
   Our API provides easy access to all platform features:
@@ -703,9 +706,9 @@ Destructive action. Proceed with extreme caution.
   - JSON responses
   - Rate limiting
   - Comprehensive documentation
-  {% /card %}
+  </Card>
 
-  {% card title="SDK Integration" description="Multiple language support" icon="code" " %}
+  <Card title="SDK Integration" description="Multiple language support" icon="code" ">
   ### Supported Languages
 
   We provide SDKs for popular programming languages:
@@ -719,163 +722,163 @@ Destructive action. Proceed with extreme caution.
   import { APIClient } from '@our-platform/sdk';
   const client = new APIClient('your-api-key');
   ```
-  {% /card %}
+  </Card>
 
-  {% card title="Community" description="Join our developer community" icon="users" horizontal=true %}
+  <Card title="Community" description="Join our developer community" icon="users" horizontal={true}>
   Connect with other developers, share experiences, and get help with integration challenges.
 
   Visit our Discord server or GitHub discussions.
-  {% /card %}
+  </Card>
 
-  {% card title="Support" description="Get help when you need it" icon="help-circle" horizontal=true %}
+  <Card title="Support" description="Get help when you need it" icon="help-circle" horizontal={true}>
   Our support team is available 24/7 to help with any questions or issues you might encounter.
 
   Email us or open a support ticket.
-  {% /card %}
-  {% /cardGroup %}
+  </Card>
+  </CardGroup>
   ````
-  {% /tab %}
-{% /tabGroup %}
+  </Tab>
+</TabGroup>
 
 ## Accordions
 
-{% tabGroup %}
-  {% tab title="Preview" %}
-  {% accordion title="Basic Accordion" description="This is a basic accordion" %}
+<TabGroup>
+  <Tab title="Preview">
+  <Accordion title="Basic Accordion" description="This is a basic accordion">
   This accordion starts closed by default. It contains paragraph content that should be collapsible.
 
   - Item 1
   - Item 2
   - Item 3
-  {% /accordion %}
+  </Accordion>
 
-  {% accordion title="Open by Default" description="This accordion starts open" defaultOpen=true %}
+  <Accordion title="Open by Default" description="This accordion starts open" defaultOpen={true}>
   This accordion starts in the open state because defaultOpen is set to true.
-  {% /accordion %}
+  </Accordion>
 
-  {% accordion title="Accordion with Icon" description="Testing icon attribute" icon="star" showIcon=true %}
+  <Accordion title="Accordion with Icon" description="Testing icon attribute" icon="star" showIcon={true}>
   This accordion displays the specified icon because showIcon is explicitly set to true.
-  {% /accordion %}
+  </Accordion>
   
-  {% /tab %}
+  </Tab>
 
-  {% tab title="Syntax" %}
+  <Tab title="Syntax">
   ````markdown
-  {% accordion title="Basic Accordion" description="This is a basic accordion" %}
+  <Accordion title="Basic Accordion" description="This is a basic accordion">
   This accordion starts closed by default. It contains paragraph content that should be collapsible.
 
   - Item 1
   - Item 2
   - Item 3
-  {% /accordion %}
+  </Accordion>
 
-  {% accordion title="Open by Default" description="This accordion starts open" defaultOpen=true %}
+  <Accordion title="Open by Default" description="This accordion starts open" defaultOpen={true}>
   This accordion starts in the open state because defaultOpen is set to true.
-  {% /accordion %}
+  </Accordion>
 
-  {% accordion title="Accordion with Icon" description="Testing icon attribute" icon="star" showIcon=true %}
+  <Accordion title="Accordion with Icon" description="Testing icon attribute" icon="star" showIcon={true}>
   This accordion displays the specified icon because showIcon is explicitly set to true.
-  {% /accordion %}
+  </Accordion>
   
   ````
-  {% /tab %}
-{% /tabGroup %}
+  </Tab>
+</TabGroup>
 
 ## Accordion Groups
 
 ### Basic Accordion Group
 
-{% tabGroup %}
-  {% tab title="Preview" %}
-  {% accordionGroup %}
-  {% accordion title="FAQ: Getting Started" description="Basic setup questions" icon="help-circle" showIcon=true %}
+<TabGroup>
+  <Tab title="Preview">
+  <AccordionGroup>
+  <Accordion title="FAQ: Getting Started" description="Basic setup questions" icon="help-circle" showIcon={true}>
   Run the following command:
 
   ```bash
   npm install @my-package/core
   ```
-  {% /accordion %}
+  </Accordion>
 
-  {% accordion title="FAQ: Configuration" description="Setup and configuration help" icon="settings" showIcon=true %}
+  <Accordion title="FAQ: Configuration" description="Setup and configuration help" icon="settings" showIcon={true}>
   Create a config file in your project root:
 
-  ```javascript {% filename="config.js" %}
-  module.exports = { apiUrl: 'https://api.example.com' };
-  ```
-  {% /accordion %}
-  {% /accordionGroup %}
-  {% /tab %}
+  <CodeSnippet language="javascript" title="config.js">
+  {`module.exports = { apiUrl: 'https://api.example.com' };`}
+  </CodeSnippet>
+  </Accordion>
+  </AccordionGroup>
+  </Tab>
 
-  {% tab title="Syntax" %}
+  <Tab title="Syntax">
   ````markdown
-  {% accordionGroup %}
-  {% accordion title="FAQ: Getting Started" description="Basic setup questions" icon="help-circle" showIcon=true %}
+  <AccordionGroup>
+  <Accordion title="FAQ: Getting Started" description="Basic setup questions" icon="help-circle" showIcon={true}>
   Run the following command:
 
   ```bash
   npm install @my-package/core
   ```
-  {% /accordion %}
+  </Accordion>
 
-  {% accordion title="FAQ: Configuration" description="Setup and configuration help" icon="settings" showIcon=true %}
+  <Accordion title="FAQ: Configuration" description="Setup and configuration help" icon="settings" showIcon={true}>
   Create a config file in your project root:
 
-  ```javascript {% filename="config.js" %}
-  module.exports = { apiUrl: 'https://api.example.com' };
-  ```
-  {% /accordion %}
-  {% /accordionGroup %}
+  <CodeSnippet language="javascript" title="config.js">
+  {`module.exports = { apiUrl: 'https://api.example.com' };`}
+  </CodeSnippet>
+  </Accordion>
+  </AccordionGroup>
   ````
-  {% /tab %}
-{% /tabGroup %}
+  </Tab>
+</TabGroup>
 
 ### Exclusive Accordion Group
 
-{% tabGroup %}
-  {% tab title="Preview" %}
-  {% accordionGroup exclusive=true %}
-  {% accordion title="Step 1: Project Setup" description="Initialize your project" defaultOpen=true icon="folder-plus" showIcon=true %}
+<TabGroup>
+  <Tab title="Preview">
+  <AccordionGroup exclusive={true}>
+  <Accordion title="Step 1: Project Setup" description="Initialize your project" defaultOpen={true} icon="folder-plus" showIcon={true}>
   ```bash
   mkdir my-project && cd my-project && npm init -y
   ```
-  {% /accordion %}
+  </Accordion>
 
-  {% accordion title="Step 2: Install Dependencies" description="Add required packages" icon="download" showIcon=true %}
+  <Accordion title="Step 2: Install Dependencies" description="Add required packages" icon="download" showIcon={true}>
   ```bash
   npm install react react-dom
   ```
-  {% /accordion %}
-  {% /accordionGroup %}
-  {% /tab %}
+  </Accordion>
+  </AccordionGroup>
+  </Tab>
 
-  {% tab title="Syntax" %}
+  <Tab title="Syntax">
   ````markdown
-  {% accordionGroup exclusive=true %}
-  {% accordion title="Step 1: Project Setup" description="Initialize your project" defaultOpen=true icon="folder-plus" showIcon=true %}
+  <AccordionGroup exclusive={true}>
+  <Accordion title="Step 1: Project Setup" description="Initialize your project" defaultOpen={true} icon="folder-plus" showIcon={true}>
   ```bash
   mkdir my-project && cd my-project && npm init -y
   ```
-  {% /accordion %}
+  </Accordion>
 
-  {% accordion title="Step 2: Install Dependencies" description="Add required packages" icon="download" showIcon=true %}
+  <Accordion title="Step 2: Install Dependencies" description="Add required packages" icon="download" showIcon={true}>
   ```bash
   npm install react react-dom
   ```
-  {% /accordion %}
-  {% /accordionGroup %}
+  </Accordion>
+  </AccordionGroup>
   ````
-  {% /tab %}
-{% /tabGroup %}
+  </Tab>
+</TabGroup>
 
 ## Expand
 
-{% tabGroup %}
-  {% tab title="Preview" %}
-  {% expand %}
+<TabGroup>
+  <Tab title="Preview">
+  <Expand>
   This expand component uses the default title and starts closed.
-  {% /expand %}
+  </Expand>
 
-  {% expand title="Custom Expand Title" %}
+  <Expand title="Custom Expand Title">
   You can include any content inside, like lists and code blocks.
 
   ```javascript
@@ -883,20 +886,20 @@ Destructive action. Proceed with extreme caution.
     return 'Expand components show/hide optional content';
   }
   ```
-  {% /expand %}
+  </Expand>
 
-  {% expand title="Open by Default" defaultOpen=true %}
+  <Expand title="Open by Default" defaultOpen={true}>
   This expand component starts in the open state because defaultOpen is true.
-  {% /expand %}
-  {% /tab %}
+  </Expand>
+  </Tab>
 
-  {% tab title="Syntax" %}
+  <Tab title="Syntax">
   ````markdown
-  {% expand %}
+  <Expand>
   This expand component uses the default title and starts closed.
-  {% /expand %}
+  </Expand>
 
-  {% expand title="Custom Expand Title" %}
+  <Expand title="Custom Expand Title">
   You can include any content inside, like lists and code blocks.
 
   ```javascript
@@ -904,204 +907,204 @@ Destructive action. Proceed with extreme caution.
     return 'Expand components show/hide optional content';
   }
   ```
-  {% /expand %}
+  </Expand>
 
-  {% expand title="Open by Default" defaultOpen=true %}
+  <Expand title="Open by Default" defaultOpen={true}>
   This expand component starts in the open state because defaultOpen is true.
-  {% /expand %}
+  </Expand>
   ````
-  {% /tab %}
-{% /tabGroup %}
+  </Tab>
+</TabGroup>
 
 ## Steps
 
 ### Basic Steps
 
-{% tabGroup %}
-  {% tab title="Preview" %}
-  {% steps %}
-  {% step title="Install Dependencies" %}
+<TabGroup>
+  <Tab title="Preview">
+  <Steps>
+  <Step title="Install Dependencies">
   ```bash
   npm install @markdoc/markdoc react
   ```
-  {% /step %}
+  </Step>
 
-  {% step title="Create Configuration" %}
-  ```javascript {% filename="markdoc.config.js" %}
-  export default { nodes: {}, tags: {} }
-  ```
-  {% /step %}
+  <Step title="Create Configuration">
+  <CodeSnippet language="javascript" title="markdoc.config.js">
+  {`export default { nodes: {}, tags: {} }`}
+  </CodeSnippet>
+  </Step>
 
-  {% step title="Build Your First Document" %}
-  ```markdown {% filename="example.md" %}
-  # Welcome to Markdoc
-  {% callout type="info" %}Hello from Markdoc!{% /callout %}
-  ```
-  {% /step %}
-  {% /steps %}
-  {% /tab %}
+  <Step title="Build Your First Document">
+  <CodeSnippet language="markdown" title="example.mdx">
+  {`# Welcome to Markdoc
+  <Callout type="info">Hello from Markdoc!</Callout>`}
+  </CodeSnippet>
+  </Step>
+  </Steps>
+  </Tab>
 
-  {% tab title="Syntax" %}
+  <Tab title="Syntax">
   ````markdown
-  {% steps %}
-  {% step title="Install Dependencies" %}
+  <Steps>
+  <Step title="Install Dependencies">
   ```bash
   npm install @markdoc/markdoc react
   ```
-  {% /step %}
+  </Step>
 
-  {% step title="Create Configuration" %}
-  ```javascript {% filename="markdoc.config.js" %}
-  export default { nodes: {}, tags: {} }
-  ```
-  {% /step %}
+  <Step title="Create Configuration">
+  <CodeSnippet language="javascript" title="markdoc.config.js">
+  {`export default { nodes: {}, tags: {} }`}
+  </CodeSnippet>
+  </Step>
 
-  {% step title="Build Your First Document" %}
-  ```markdown {% filename="example.md" %}
-  # Welcome to Markdoc
-  {% callout type="info" %}Hello from Markdoc!{% /callout %}
-  ```
-  {% /step %}
-  {% /steps %}
+  <Step title="Build Your First Document">
+  <CodeSnippet language="markdown" title="example.mdx">
+  {`# Welcome to Markdoc
+  <Callout type="info">Hello from Markdoc!</Callout>`}
+  </CodeSnippet>
+  </Step>
+  </Steps>
   ````
-  {% /tab %}
-{% /tabGroup %}
+  </Tab>
+</TabGroup>
 
 ### Advanced Steps with Rich Content
 
-{% tabGroup %}
-  {% tab title="Preview" %}
-  {% steps %}
-  {% step title="Database Setup" %}
+<TabGroup>
+  <Tab title="Preview">
+  <Steps>
+  <Step title="Database Setup">
   Configure your database connection and schema.
 
-  ```sql {% filename="schema.sql" showLineNumbers=true %}
-  CREATE TABLE plants (
+  <CodeSnippet language="sql" title="schema.sql" showLineNumbers={true}>
+  {`CREATE TABLE documents (
     id SERIAL PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
     tag VARCHAR(100),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-  );
-  ```
+  );`}
+  </CodeSnippet>
 
-  {% callout type="warning" %}
+  <Callout type="warning">
   Make sure to backup your database before running schema changes.
-  {% /callout %}
-  {% /step %}
+  </Callout>
+  </Step>
 
-  {% step title="API Implementation" %}
+  <Step title="API Implementation">
   Build the API endpoints.
 
-  ```javascript {% filename="api/plants.js" highlight="5-7,12-14" %}
-  import express from 'express'
+  <CodeSnippet language="javascript" title="api/documents.js" highlight="5-7,12-14">
+  {`import express from 'express'
   const router = express.Router()
 
-  router.get('/plants', async (req, res) => {
-    const plants = await db.query('SELECT * FROM plants')
-    res.json(plants)
+  router.get('/documents', async (req, res) => {
+    const documents = await db.query('SELECT * FROM documents')
+    res.json(documents)
   })
 
-  router.post('/plants', async (req, res) => {
+  router.post('/documents', async (req, res) => {
     const { name, tag } = req.body
-    const result = await db.query('INSERT INTO plants(name, tag) VALUES($1,$2) RETURNING *', [name, tag])
+    const result = await db.query('INSERT INTO documents(name, tag) VALUES($1,$2) RETURNING *', [name, tag])
     res.status(201).json(result.rows[0])
   })
 
-  export default router
-  ```
+  export default router`}
+  </CodeSnippet>
 
-  {% callout type="tip" %}
+  <Callout type="tip">
   Return precise status codes and validate inputs.
-  {% /callout %}
+  </Callout>
   
   The endpoints above demonstrate basic read and create operations.
-  {% /step %}
+  </Step>
 
-  {% step title="Testing & Deployment" %}
+  <Step title="Testing & Deployment">
   Write tests and deploy your application.
 
-  ```bash {% filename="ci.yml" %}
-  npm run test && npm run build && npm run deploy
-  ```
-  {% /step %}
-  {% /steps %}
-  {% /tab %}
+  <CodeSnippet language="bash" title="ci.yml">
+  {`npm run test && npm run build && npm run deploy`}
+  </CodeSnippet>
+  </Step>
+  </Steps>
+  </Tab>
 
-  {% tab title="Syntax" %}
+  <Tab title="Syntax">
   ````markdown
-  {% steps %}
-  {% step title="Database Setup" %}
+  <Steps>
+  <Step title="Database Setup">
   Configure your database connection and schema.
 
-  ```sql {% filename="schema.sql" showLineNumbers=true %}
-  CREATE TABLE plants (
+  <CodeSnippet language="sql" title="schema.sql" showLineNumbers={true}>
+  {`CREATE TABLE documents (
     id SERIAL PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
     tag VARCHAR(100),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-  );
-  ```
+  );`}
+  </CodeSnippet>
 
-  {% callout type="warning" %}
+  <Callout type="warning">
   Make sure to backup your database before running schema changes.
-  {% /callout %}
-  {% /step %}
+  </Callout>
+  </Step>
 
-  {% step title="API Implementation" %}
+  <Step title="API Implementation">
   Build the API endpoints.
 
-  ```javascript {% filename="api/plants.js" highlight="5-7,12-14" %}
-  import express from 'express'
+  <CodeSnippet language="javascript" title="api/documents.js" highlight="5-7,12-14">
+  {`import express from 'express'
   const router = express.Router()
 
-  router.get('/plants', async (req, res) => {
-    const plants = await db.query('SELECT * FROM plants')
-    res.json(plants)
+  router.get('/documents', async (req, res) => {
+    const documents = await db.query('SELECT * FROM documents')
+    res.json(documents)
   })
 
-  router.post('/plants', async (req, res) => {
+  router.post('/documents', async (req, res) => {
     const { name, tag } = req.body
-    const result = await db.query('INSERT INTO plants(name, tag) VALUES($1,$2) RETURNING *', [name, tag])
+    const result = await db.query('INSERT INTO documents(name, tag) VALUES($1,$2) RETURNING *', [name, tag])
     res.status(201).json(result.rows[0])
   })
 
-  export default router
-  ```
+  export default router`}
+  </CodeSnippet>
 
-  {% callout type="tip" %}
+  <Callout type="tip">
   Return precise status codes and validate inputs.
-  {% /callout %}
+  </Callout>
   
   The endpoints above demonstrate basic read and create operations.
-  {% /step %}
+  </Step>
 
-  {% step title="Testing & Deployment" %}
+  <Step title="Testing & Deployment">
   Write tests and deploy your application.
 
-  ```bash {% filename="ci.yml" %}
-  npm run test && npm run build && npm run deploy
-  ```
-  {% /step %}
-  {% /steps %}
+  <CodeSnippet language="bash" title="ci.yml">
+  {`npm run test && npm run build && npm run deploy`}
+  </CodeSnippet>
+  </Step>
+  </Steps>
   ````
-  {% /tab %}
-{% /tabGroup %}
+  </Tab>
+</TabGroup>
 
 ## CodeGroups
 
-{% tabGroup %}
-  {% tab title="Preview" %}
-  {% codeGroup title="HTTP Clients" %}
-  ```bash {% filename="curl.sh" %}
-  curl --request POST https://api.example.com/v1/plants \
-    --header 'Content-Type: application/json' \
-    --header 'Authorization: Bearer <token>' \
-    --data '{"name":"Aloe","tag":"succulent"}'
-  ```
+<TabGroup>
+  <Tab title="Preview">
+  <CodeGroup title="HTTP Clients">
+    <CodeSnippet language="bash" title="curl.sh">
+    {`curl --request POST https://api.example.com/v1/documents \\
+    --header 'Content-Type: application/json' \\
+    --header 'Authorization: Bearer <token>' \\
+    --data '{"name":"Aloe","tag":"succulent"}'`}
+    </CodeSnippet>
 
-  ```javascript {% filename="fetch.js" %}
-  async function createPlant() {
-    const res = await fetch('https://api.example.com/v1/plants', {
+    <CodeSnippet language="javascript" title="fetch.js">
+    {`async function createDocument() {
+    const res = await fetch('https://api.example.com/v1/documents', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -1110,56 +1113,56 @@ Destructive action. Proceed with extreme caution.
       body: JSON.stringify({ name: 'Aloe', tag: 'succulent' })
     })
     return res.json()
-  }
-  ```
+  }`}
+    </CodeSnippet>
 
-  ```python {% filename="requests_example.py" %}
-  import requests
+    <CodeSnippet language="python" title="requests_example.py">
+    {`import requests
 
-  def create_plant():
-      r = requests.post(
-          'https://api.example.com/v1/plants',
-          headers={'Authorization': 'Bearer <token>'},
-          json={'name': 'Aloe', 'tag': 'succulent'}
-      )
-      return r.json()
-  ```
-  {% /codeGroup %}
+def create_Document():
+    r = requests.post(
+        'https://api.example.com/v1/documents',
+        headers={'Authorization': 'Bearer <token>'},
+        json={'name': 'Aloe', 'tag': 'succulent'}
+    )
+    return r.json()`}
+    </CodeSnippet>
+  </CodeGroup>
 
-  {% codeGroup title="With Line Numbers + Highlight" %}
-  ```ts {% filename="service.ts" showLineNumbers=true highlight="3-5" %}
-  export async function listPlants() {
-    const res = await fetch('/v1/plants')
+  <CodeGroup title="With Line Numbers + Highlight">
+    <CodeSnippet language="typescript" title="service.ts" showLineNumbers={true} highlight="3-5">
+    {`export async function listDocuments() {
+    const res = await fetch('/v1/documents')
     if (!res.ok) throw new Error('Failed to load')
     return res.json()
-  }
-  ```
+  }`}
+    </CodeSnippet>
 
-  ```go {% filename="main.go" showLineNumbers=true %}
-  package main
+    <CodeSnippet language="go" title="main.go" showLineNumbers={true}>
+    {`package main
 
-  import "fmt"
+import "fmt"
 
-  func main() {
-      fmt.Println("Hello CodeGroup")
-  }
-  ```
-  {% /codeGroup %}
-  {% /tab %}
+func main() {
+    fmt.Println("Hello CodeGroup")
+}`}
+    </CodeSnippet>
+  </CodeGroup>
+  </Tab>
 
-  {% tab title="Syntax" %}
+  <Tab title="Syntax">
   ````markdown
-  {% codeGroup title="HTTP Clients" %}
-  ```bash {% filename="curl.sh" %}
-  curl --request POST https://api.example.com/v1/plants \
-    --header 'Content-Type: application/json' \
-    --header 'Authorization: Bearer <token>' \
-    --data '{"name":"Aloe","tag":"succulent"}'
-  ```
+  <CodeGroup title="HTTP Clients">
+    <CodeSnippet language="bash" title="curl.sh">
+    {`curl --request POST https://api.example.com/v1/documents \\
+    --header 'Content-Type: application/json' \\
+    --header 'Authorization: Bearer <token>' \\
+    --data '{"name":"Aloe","tag":"succulent"}'`}
+    </CodeSnippet>
 
-  ```javascript {% filename="fetch.js" %}
-  async function createPlant() {
-    const res = await fetch('https://api.example.com/v1/plants', {
+    <CodeSnippet language="javascript" title="fetch.js">
+    {`async function createDocument() {
+    const res = await fetch('https://api.example.com/v1/documents', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -1168,154 +1171,154 @@ Destructive action. Proceed with extreme caution.
       body: JSON.stringify({ name: 'Aloe', tag: 'succulent' })
     })
     return res.json()
-  }
-  ```
+  }`}
+    </CodeSnippet>
 
-  ```python {% filename="requests_example.py" %}
-  import requests
+    <CodeSnippet language="python" title="requests_example.py">
+    {`import requests
 
-  def create_plant():
-      r = requests.post(
-          'https://api.example.com/v1/plants',
-          headers={'Authorization': 'Bearer <token>'},
-          json={'name': 'Aloe', 'tag': 'succulent'}
-      )
-      return r.json()
-  ```
-  {% /codeGroup %}
+def create_Document():
+    r = requests.post(
+        'https://api.example.com/v1/documents',
+        headers={'Authorization': 'Bearer <token>'},
+        json={'name': 'Aloe', 'tag': 'succulent'}
+    )
+    return r.json()`}
+    </CodeSnippet>
+  </CodeGroup>
 
-  {% codeGroup title="With Line Numbers + Highlight" %}
-  ```ts {% filename="service.ts" showLineNumbers=true highlight="3-5" %}
-  export async function listPlants() {
-    const res = await fetch('/v1/plants')
+  <CodeGroup title="With Line Numbers + Highlight">
+    <CodeSnippet language="typescript" title="service.ts" showLineNumbers={true} highlight="3-5">
+    {`export async function listDocuments() {
+    const res = await fetch('/v1/documents')
     if (!res.ok) throw new Error('Failed to load')
     return res.json()
-  }
-  ```
+  }`}
+    </CodeSnippet>
 
-  ```go {% filename="main.go" showLineNumbers=true %}
-  package main
+    <CodeSnippet language="go" title="main.go" showLineNumbers={true}>
+    {`package main
 
-  import "fmt"
+import "fmt"
 
-  func main() {
-      fmt.Println("Hello CodeGroup")
-  }
-  ```
-  {% /codeGroup %}
+func main() {
+    fmt.Println("Hello CodeGroup")
+}`}
+    </CodeSnippet>
+  </CodeGroup>
   ````
-  {% /tab %}
-{% /tabGroup %}
+  </Tab>
+</TabGroup>
 
 ## Fields
 
-{% tabGroup %}
-  {% tab title="Preview" %}
+<TabGroup>
+  <Tab title="Preview">
   ### Basic
-  {% parameterField name="id" type="string" required=true %}
+  <ParameterField name="id" type="string" required={true}>
   The unique identifier.
-  {% /parameterField %}
+  </ParameterField>
 
   ### With Default Values
-  {% parameterField name="role" type="string" default="user" %}
+  <ParameterField name="role" type="string" default="user">
   The user's role. Defaults to "user".
-  {% /parameterField %}
+  </ParameterField>
 
   ### Deprecated
-  {% parameterField name="legacyId" type="number" deprecated=true %}
+  <ParameterField name="legacyId" type="number" deprecated={true}>
   Legacy identifier. Do not use in new integrations.
-  {% /parameterField %}
+  </ParameterField>
 
   ### Within an Expand
-  {% expand title="User Fields" %}
-  {% parameterField name="email" type="string" required=true %}
+  <Expand title="User Fields">
+  <ParameterField name="email" type="string" required={true}>
   The user's primary email address.
-  {% /parameterField %}
-  {% parameterField name="name" type="string" %}
+  </ParameterField>
+  <ParameterField name="name" type="string">
   Optional display name.
-  {% /parameterField %}
-  {% /expand %}
-  {% /tab %}
+  </ParameterField>
+  </Expand>
+  </Tab>
 
-  {% tab title="Syntax" %}
+  <Tab title="Syntax">
   ````markdown
   ### Basic
-  {% parameterField name="id" type="string" required=true %}
+  <ParameterField name="id" type="string" required={true}>
   The unique identifier.
-  {% /parameterField %}
+  </ParameterField>
 
   ### With Default Values
-  {% parameterField name="role" type="string" default="user" %}
+  <ParameterField name="role" type="string" default="user">
   The user's role. Defaults to "user".
-  {% /parameterField %}
+  </ParameterField>
 
   ### Deprecated
-  {% parameterField name="legacyId" type="number" deprecated=true %}
+  <ParameterField name="legacyId" type="number" deprecated={true}>
   Legacy identifier. Do not use in new integrations.
-  {% /parameterField %}
+  </ParameterField>
 
   ### Within an Expand
-  {% expand title="User Fields" %}
-  {% parameterField name="email" type="string" required=true %}
+  <Expand title="User Fields">
+  <ParameterField name="email" type="string" required={true}>
   The user's primary email address.
-  {% /parameterField %}
-  {% parameterField name="name" type="string" %}
+  </ParameterField>
+  <ParameterField name="name" type="string">
   Optional display name.
-  {% /parameterField %}
-  {% /expand %}
+  </ParameterField>
+  </Expand>
   ````
-  {% /tab %}
-{% /tabGroup %}
+  </Tab>
+</TabGroup>
 
 ## Tooltips
 
-{% tabGroup %}
-  {% tab title="Preview" %}
-  This is a paragraph with a {% tooltip tip="This is a helpful tooltip message!" %}hover tooltip{% /tooltip %} that provides additional context.
+<TabGroup>
+  <Tab title="Preview">
+  This is a paragraph with a <Tooltip tip="This is a helpful tooltip message!">hover tooltip</Tooltip> that provides additional context.
 
-  You can also use tooltips to explain {% tooltip tip="Application Programming Interface - a set of protocols and tools for building software applications" %}technical terms{% /tooltip %} in your documentation.
-  {% /tab %}
+  You can also use tooltips to explain <Tooltip tip="Application Programming Interface - a set of protocols and tools for building software applications">technical terms</Tooltip> in your documentation.
+  </Tab>
 
-  {% tab title="Syntax" %}
+  <Tab title="Syntax">
   ````markdown
-  This is a paragraph with a {% tooltip tip="This is a helpful tooltip message!" %}hover tooltip{% /tooltip %} that provides additional context.
+  This is a paragraph with a <Tooltip tip="This is a helpful tooltip message!">hover tooltip</Tooltip> that provides additional context.
 
-  You can also use tooltips to explain {% tooltip tip="Application Programming Interface - a set of protocols and tools for building software applications" %}technical terms{% /tooltip %} in your documentation.
+  You can also use tooltips to explain <Tooltip tip="Application Programming Interface - a set of protocols and tools for building software applications">technical terms</Tooltip> in your documentation.
   ````
-  {% /tab %}
-{% /tabGroup %}
+  </Tab>
+</TabGroup>
 
 ## Tabs
 
-{% tabGroup %}
-  {% tab title="Preview" %}
+<TabGroup>
+  <Tab title="Preview">
   ### Basic Tabs
-  {% tabGroup %}
-  {% tab title="JavaScript" %}
+  <TabGroup>
+  <Tab title="JavaScript">
   ```javascript
   function greetUser(name) {
     return `Hello, ${name}!`;
   }
   ```
-  {% /tab %}
-  {% tab title="Python" %}
+  </Tab>
+  <Tab title="Python">
   ```python
   def greet_user(name):
       return f"Hello, {name}!"
   ```
-  {% /tab %}
-  {% tab title="TypeScript" %}
+  </Tab>
+  <Tab title="TypeScript">
   ```typescript
   function greetUser(name: string): string {
     return `Hello, ${name}!`;
   }
   ```
-  {% /tab %}
-  {% /tabGroup %}
+  </Tab>
+  </TabGroup>
 
   ### Tab Groups with Rich Content
-  {% tabGroup className="api-documentation" %}
-  {% tab title="Request" %}
+  <TabGroup className="api-documentation">
+  <Tab title="Request">
   Make a POST request to create a new resource:
 
   ```bash
@@ -1329,17 +1332,17 @@ Destructive action. Proceed with extreme caution.
   - **Authorization**: `Bearer <token>`
 
   #### Request Body Fields
-  {% parameterField name="name" type="string" required=true %}
+  <ParameterField name="name" type="string" required={true}>
   Full name of the new user.
-  {% /parameterField %}
-  {% parameterField name="email" type="string" required=true %}
+  </ParameterField>
+  <ParameterField name="email" type="string" required={true}>
   A valid email address for the account.
-  {% /parameterField %}
-  {% parameterField name="role" type="string" default="user" %}
+  </ParameterField>
+  <ParameterField name="role" type="string" default="user">
   Optional role. Defaults to `user`.
-  {% /parameterField %}
-  {% /tab %}
-  {% tab title="Response" %}
+  </ParameterField>
+  </Tab>
+  <Tab title="Response">
   A successful response returns:
 
   ```json
@@ -1351,11 +1354,11 @@ Destructive action. Proceed with extreme caution.
   ```
 
   #### Response Fields
-  {% responseField name="id" type="string" %}Unique identifier for the user.{% /responseField %}
-  {% responseField name="name" type="string" %}User's full name.{% /responseField %}
-  {% responseField name="email" type="string" %}User's email address.{% /responseField %}
-  {% /tab %}
-  {% tab title="Errors" %}
+  <ResponseField name="id" type="string">Unique identifier for the user.</ResponseField>
+  <ResponseField name="name" type="string">User's full name.</ResponseField>
+  <ResponseField name="email" type="string">User's email address.</ResponseField>
+  </Tab>
+  <Tab title="Errors">
   #### Validation Error (400)
   ```json
   {
@@ -1366,42 +1369,42 @@ Destructive action. Proceed with extreme caution.
     }
   }
   ```
-  {% callout type="warning" %}
+  <Callout type="warning">
   Always validate input; return field-level errors where possible.
-  {% /callout %}
-  {% /tab %}
-  {% /tabGroup %}
-  {% /tab %}
+  </Callout>
+  </Tab>
+  </TabGroup>
+  </Tab>
 
-  {% tab title="Syntax" %}
+  <Tab title="Syntax">
   ````markdown
   ### Basic Tabs
-  {% tabGroup %}
-  {% tab title="JavaScript" %}
+  <TabGroup>
+  <Tab title="JavaScript">
   ```javascript
   function greetUser(name) {
     return `Hello, ${name}!`;
   }
   ```
-  {% /tab %}
-  {% tab title="Python" %}
+  </Tab>
+  <Tab title="Python">
   ```python
   def greet_user(name):
       return f"Hello, {name}!"
   ```
-  {% /tab %}
-  {% tab title="TypeScript" %}
+  </Tab>
+  <Tab title="TypeScript">
   ```typescript
   function greetUser(name: string): string {
     return `Hello, ${name}!`;
   }
   ```
-  {% /tab %}
-  {% /tabGroup %}
+  </Tab>
+  </TabGroup>
 
   ### Tab Groups with Rich Content
-  {% tabGroup className="api-documentation" %}
-  {% tab title="Request" %}
+  <TabGroup className="api-documentation">
+  <Tab title="Request">
   Make a POST request to create a new resource:
 
   ```bash
@@ -1415,17 +1418,17 @@ Destructive action. Proceed with extreme caution.
   - **Authorization**: `Bearer <token>`
 
   #### Request Body Fields
-  {% parameterField name="name" type="string" required=true %}
+  <ParameterField name="name" type="string" required={true}>
   Full name of the new user.
-  {% /parameterField %}
-  {% parameterField name="email" type="string" required=true %}
+  </ParameterField>
+  <ParameterField name="email" type="string" required={true}>
   A valid email address for the account.
-  {% /parameterField %}
-  {% parameterField name="role" type="string" default="user" %}
+  </ParameterField>
+  <ParameterField name="role" type="string" default="user">
   Optional role. Defaults to `user`.
-  {% /parameterField %}
-  {% /tab %}
-  {% tab title="Response" %}
+  </ParameterField>
+  </Tab>
+  <Tab title="Response">
   A successful response returns:
 
   ```json
@@ -1437,11 +1440,11 @@ Destructive action. Proceed with extreme caution.
   ```
   
   #### Response Fields
-  {% responseField name="id" type="string" %}Unique identifier for the user.{% /responseField %}
-  {% responseField name="name" type="string" %}User's full name.{% /responseField %}
-  {% responseField name="email" type="string" %}User's email address.{% /responseField %}
-  {% /tab %}
-  {% tab title="Errors" %}
+  <ResponseField name="id" type="string">Unique identifier for the user.</ResponseField>
+  <ResponseField name="name" type="string">User's full name.</ResponseField>
+  <ResponseField name="email" type="string">User's email address.</ResponseField>
+  </Tab>
+  <Tab title="Errors">
   #### Validation Error (400)
   ```json
   {
@@ -1452,11 +1455,11 @@ Destructive action. Proceed with extreme caution.
     }
   }
   ```
-  {% callout type="warning" %}
+  <Callout type="warning">
   Always validate input; return field-level errors where possible.
-  {% /callout %}
-  {% /tab %}
-  {% /tabGroup %}
+  </Callout>
+  </Tab>
+  </TabGroup>
   ````
-  {% /tab %}
-{% /tabGroup %}
+  </Tab>
+</TabGroup>

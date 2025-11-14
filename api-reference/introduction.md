@@ -5,7 +5,7 @@ icon: book
 
 # API Reference
 
-Welcome to the DevScribe API documentation. Our REST API allows you to programmatically manage your documentation and content.
+Welcome to ACME API documentation. Our REST API allows you to programmatically manage your documentation and content.
 
 ## Base URL
 
@@ -23,9 +23,10 @@ The API uses API key authentication. Include your API key in the `Authorization`
 Authorization: Bearer YOUR_API_KEY
 ```
 
-{% callout title="Get Your API Key" %}
+<Callout type="info">
+
 You can find your API key in your [account settings](/settings/api).
-{% /callout %}
+</Callout>
 
 ## Rate Limiting
 
