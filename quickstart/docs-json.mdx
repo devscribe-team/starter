@@ -63,12 +63,16 @@ icon: navigation
 ### Tabs and groups
 
 - `tab`: The visible tab label in the sidebar (for example, "Guides", "API Reference").
-- `groups[]`: Buckets within a tab. Each group has a `group` label and a `pages` array.
+- `groups[]`: Buckets within a tab. Each group has:
+  - `group`: The visible section label.
+  - `pages`: An ordered list of **page items**. Each item is either:
+    - A string page path (e.g., `"quickstart/guide"`), or
+    - A dropdown object (see below).
 
 ### Pages
 
-- Each entry is a page path (without `.mdx`) relative to `src/app/(pages)`.
-- The order of this array determines:
+- A string entry is a page path (without `.mdx`) relative to `src/app/(pages)`.
+- The order of items in `pages` determines:
   - Left sidebar ordering
   - Previous/Next navigation (computed from this order)
 - The file must exist as `src/app/(pages)/<page>.mdx`.
@@ -102,6 +106,40 @@ description: Short description shown below the title
   ]
 }
 ```
+
+## Dropdowns in the `pages` array
+
+You can insert dropdowns directly into the `pages` array using a small object with a `dropdown` label and its own `pages` list.
+
+```json
+{
+  "tab": "Guides",
+  "groups": [
+    {
+      "group": "Quickstart",
+      "pages": [
+        "quickstart/guide",
+        "quickstart/docs-json",
+        {
+          "dropdown": "Dropdown Example",
+          "pages": [
+            "quickstart/dropdown-doc-a",
+            "quickstart/dropdown-doc-b"
+          ]
+        },
+        "quickstart/openapi-json",
+        "quickstart/onboarding"
+      ]
+    }
+  ]
+}
+```
+
+Behavior:
+
+- String items render as normal sidebar links.
+- Dropdown objects render as a toggleable section titled by `dropdown`, with their `pages` indented underneath.
+- You can mix pages and dropdowns in any order within the `pages` array.
 
 ## API endpoint pages (optional)
 

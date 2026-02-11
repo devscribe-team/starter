@@ -1,214 +1,92 @@
 {
-  "openapi": "3.1.0",
-  "info": {
-    "title": "ACME API",
-    "description": "ACME API allows you to programmatically manage your documentation and content",
-    "version": "1.0.0"
-  },
-  "servers": [
-    {
-      "url": "https://api.devscribe.com"
-    }
-  ],
-  "security": [
-    {
-      "bearerAuth": []
-    }
-  ],
-  "paths": {
-    "/documents": {
-      "get": {
-        "description": "Returns all documents from the system that the user has access to",
-        "parameters": [
-          {
-            "name": "limit",
-            "in": "query",
-            "description": "The maximum number of results to return",
-            "schema": {
-              "type": "integer",
-              "format": "int32"
+    "name": "devscribe",
+    "favicon": "/favicon.svg",
+    "logo": "/devscribe_logo_w_svg.svg",
+    "logoLight": "/devscribe_logo_b_svg.svg",
+    "logoDark": "/devscribe_logo_w_svg.svg",
+    "navigation": {
+      "tabs": [
+        {
+          "tab": "Guides",
+          "groups": [
+            {
+              "group": "Get Started",
+              "pages": [
+                "introduction"
+              ]
+            },
+            {
+              "group": "Quickstart",
+              "pages": [
+                "quickstart/guide",
+                "quickstart/docs-json",
+                {
+                  "dropdown": "Dropdown Example",
+                  "pages": [
+                    "quickstart/dropdown-doc-a",
+                    "quickstart/dropdown-doc-b"
+                  ]
+                },
+                "quickstart/openapi-json",
+                "quickstart/onboarding"
+              ]
             }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Document response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/Document"
-                  }
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Unexpected error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        }
-      },
-      "post": {
-        "description": "Creates a new document in the system",
-        "requestBody": {
-          "description": "Document to add to the system",
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/NewDocument"
-              }
-            }
-          },
-          "required": true
+          ]
         },
-        "responses": {
-          "200": {
-            "description": "document response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Document"
-                }
-              }
+        {
+          "tab": "API Reference",
+          "groups": [
+            {
+              "group": "API Documentation",
+              "pages": [
+                "api-reference/introduction"
+              ]
+            },
+            {
+              "group": "Endpoints",
+              "pages": [
+                "api-reference/endpoint/get",
+                "api-reference/endpoint/post",
+                "api-reference/endpoint/delete",
+                "api-reference/endpoint/put",
+                "api-reference/endpoint/patch"
+              ]
             }
-          },
-          "400": {
-            "description": "Unexpected error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/documents/{id}": {
-      "delete": {
-          "description": "Deletes a single document based on the ID supplied",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "description": "ID of document to delete",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            }
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "Document deleted",
-            "content": {}
-          },
-          "400": {
-            "description": "Unexpected error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-  },
-  "webhooks": {
-    "/document/webhook": {
-      "post": {
-        "description": "Information about a new document added to the system",
-        "requestBody": {
-          "description": "Document added to the system",
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/NewDocument"
-              }
-            }
-          }
+          ]
         },
-        "responses": {
-          "200": {
-            "description": "Return a 200 status to indicate that the data was received successfully"
-          }
-        }
-      }
-    }
-  },
-  "components": {
-    "schemas": {
-      "Document": {
-        "required": [
-          "name"
-        ],
-        "type": "object",
-        "properties": {
-          "name": {
-            "description": "The name of the document",
-            "type": "string"
-          },
-          "tag": {
-            "description": "Tag to specify the type",
-            "type": "string"
-          }
-        }
-      },
-      "NewDocument": {
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/Document"
-          },
-          {
-            "required": [
-              "id"
-            ],
-            "type": "object",
-            "properties": {
-              "id": {
-                "description": "Identification number of the document",
-                "type": "integer",
-                "format": "int64"
-              }
+        {
+          "tab": "Resources",
+          "groups": [
+            {
+              "group": "Examples",
+              "pages": [
+                "resources/examples"
+              ]
             }
-          }
-        ]
-      },
-      "Error": {
-        "required": [
-          "error",
-          "message"
-        ],
-        "type": "object",
-        "properties": {
-          "error": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "message": {
-            "type": "string"
-          }
+          ]
+        },
+        {
+          "tab": "Changelog",
+          "external": true,
+          "url": "/changelog"
         }
-      }
-    },
-    "securitySchemes": {
-      "bearerAuth": {
-        "type": "http",
-        "scheme": "bearer"
-      }
+      ],
+
+      "global": {
+        "anchors": []
+      },
+
+      "buttons": [
+        {
+          "label": "Button 1",
+          "href": "/",
+          "variant": "ghost"
+        },
+        {
+          "label": "Button 2",
+          "href": "/",
+          "variant": "primary"
+        }
+      ]
     }
   }
-}

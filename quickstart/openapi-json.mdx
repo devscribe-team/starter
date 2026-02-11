@@ -1,0 +1,96 @@
+---
+title: API Documentation
+icon: book
+subtitle: Separating concerns with specialized functions for API documentation processing pipelines
+---
+This refactor introduces specialized processing pipelines for API endpoint documentation, separating API-specific generation logic from standard documentation flows to improve maintainability and provide tailored output for different documentation types.
+
+### Key Changes
+
+**New API-Specific Functions**
+
+<Callout type="info">
+Two new specialized functions were added to handle API documentation generation with distinct responsibilities.
+</Callout>
+
+**Updated Main Function**
+
+The `streaming_claude_main()` function now accepts an `api` parameter that determines which processing pipeline to use:
+
+<CodeSnippet language="python" title="Processing Pipeline">
+{`# When api=True
+add_frontmatter_api() → components_rewrite_api()
+
+# When api=False
+add_frontmatter() → components_rewrite()`}
+</CodeSnippet>
+
+**Enhanced API Prompt Template**
+
+<Callout type="success">
+The `get_api_docs_prompt()` function was enhanced with improved structure and clarity.
+</Callout>
+
+The function now includes:
+
+- Explicit requirement to generate two code groups at the top of documentation (request examples and response examples)
+- Example code group structure showing curl, Python, and JavaScript request formats
+- Clearer endpoint handling with method and path formatting
+- Reinforced template literal syntax for escaping curly braces in MDX
+
+<CodeSnippet language="mdx" title="Example Code Group Structure" showLineNumbers={true}>
+ {`<CodeGroup>
+    <CodeSnippet language="bash" title="cURL">
+    curl -X GET "https://api.example.com/endpoint" \\\\
+      -H "Authorization: Bearer YOUR_TOKEN"
+  </CodeSnippet>
+
+
+    <CodeSnippet language="python" title="Python">
+    {\\\` import requests
+    response = requests.get(
+        "https://api.example.com/endpoint",
+        headers={"Authorization": "Bearer YOUR_TOKEN"}
+    ) \\\`}
+  </CodeSnippet>
+
+    <CodeSnippet language="javascript" title="JavaScript">
+    {\\\` fetch('https://api.example.com/endpoint', {
+      headers: {
+        'Authorization': 'Bearer YOUR_TOKEN'
+      }
+    }) \\\`}
+  </CodeSnippet>
+</CodeGroup> `}
+</CodeSnippet>
+
+
+
+**Improved Component Rewriting**
+
+<Callout type="tip">
+Both component rewrite functions were updated with better text processing capabilities.
+</Callout>
+
+Improvements include:
+
+- Better detection and removal of conversational text that Claude might add before actual content
+- More robust cleaning of markdown code fences from output
+- Handling edge cases where Claude adds phrases like "I'll" or "There you go"
+
+**API Frontmatter Structure**
+
+API documentation now includes a standardized frontmatter format:
+
+<CodeSnippet language="yaml" title="API Frontmatter">
+{`---
+title: Name
+icon: book
+api: PUT /api/users/{id}
+num: 2
+---`}
+</CodeSnippet>
+
+<Callout type="info">
+The frontmatter extraction uses regex pattern matching to isolate only the YAML block, discarding any explanatory text Claude might generate.
+</Callout>

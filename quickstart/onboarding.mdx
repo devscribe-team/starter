@@ -1,0 +1,193 @@
+---
+title: Onboarding Guide
+description: Get your team up and running with our platform in minutes
+icon: user-check
+---
+
+# Onboarding Guide
+
+Welcome! This guide will help you and your team get started with our platform quickly and efficiently.
+
+## Getting Started
+
+### Step 1: Create Your Account
+
+To begin, you'll need to create an account:
+
+1. Visit our [sign-up page](https://example.com/signup)
+2. Enter your email address
+3. Verify your email through the confirmation link
+4. Complete your profile setup
+
+<Callout type="tip">
+Use your work email address to ensure you get access to all team features automatically.
+</Callout>
+
+### Step 2: Set Up Your Workspace
+
+Once your account is created, you'll want to set up your workspace:
+
+- **Choose a workspace name** that represents your team or project
+- **Invite team members** by sending them email invitations
+- **Configure your settings** to match your team's preferences
+
+### Step 3: Connect Your First Integration
+
+Our platform works best when connected to your existing tools:
+
+<TabGroup>
+  <Tab title="GitHub">
+    Connect your GitHub repositories to automatically sync your documentation.
+
+    1. Go to Settings → Integrations
+    2. Click "Connect GitHub"
+    3. Authorize the connection
+    4. Select repositories to sync
+  </Tab>
+
+  <Tab title="Slack">
+    Get notifications and updates directly in Slack.
+
+    1. Go to Settings → Integrations
+    2. Click "Connect Slack"
+    3. Choose your workspace
+    4. Configure notification preferences
+  </Tab>
+
+  <Tab title="API">
+    Connect via our REST API for programmatic access.
+
+    ```bash
+    curl -X POST https://api.example.com/integrations \
+      -H "Authorization: Bearer YOUR_TOKEN" \
+      -H "Content-Type: application/json" \
+      -d '{"type": "github", "config": {...}}'
+    ```
+  </Tab>
+</TabGroup>
+
+## Key Features to Explore
+
+### Documentation Management
+
+- **Create pages** using our intuitive editor
+- **Organize content** with folders and tags
+- **Collaborate** with your team in real-time
+- **Version control** to track changes over time
+
+### Team Collaboration
+
+- **Assign roles** to team members (Admin, Editor, Viewer)
+- **Set permissions** for different sections
+- **Track activity** with detailed logs
+- **Communicate** using comments and mentions
+
+### Customization
+
+- **Brand your workspace** with custom logos and colors
+- **Configure navigation** to match your structure
+- **Set up custom domains** for your documentation
+- **Customize the theme** to match your brand
+
+## Best Practices
+
+### For Team Leads
+
+1. **Set up your workspace structure** before inviting team members
+2. **Define clear roles and permissions** from the start
+3. **Create templates** for common documentation types
+4. **Establish workflows** for content review and publishing
+
+### For Content Creators
+
+1. **Start with an outline** before writing full content
+2. **Use consistent formatting** across all pages
+3. **Add metadata** (tags, categories) to improve discoverability
+4. **Review and update** content regularly
+
+### For Developers
+
+1. **Use our API** to automate documentation updates
+2. **Set up webhooks** for real-time synchronization
+3. **Integrate with CI/CD** pipelines for automated publishing
+4. **Leverage our SDK** for custom integrations
+
+## Common Tasks
+
+### Inviting Team Members
+
+To invite new team members:
+
+1. Navigate to **Settings → Team**
+2. Click **"Invite Member"**
+3. Enter their email address
+4. Select their role (Admin, Editor, or Viewer)
+5. Click **"Send Invitation"**
+
+They'll receive an email with instructions to join your workspace.
+
+### Creating Your First Page
+
+1. Click **"New Page"** in the sidebar
+2. Choose a template or start from scratch
+3. Add your content using our markdown editor
+4. Add metadata (title, description, tags)
+5. Click **"Publish"** when ready
+
+### Setting Up Custom Domain
+
+1. Go to **Settings → Domains**
+2. Click **"Add Custom Domain"**
+3. Enter your domain name
+4. Follow the DNS configuration instructions
+5. Verify your domain ownership
+
+## Troubleshooting
+
+### Can't Access Workspace
+
+If you're having trouble accessing your workspace:
+
+- Check that you're using the correct email address
+- Verify your account is activated
+- Contact your workspace administrator
+- Check your email for invitation links
+
+### Integration Not Working
+
+If an integration isn't working:
+
+- Verify your API credentials are correct
+- Check the integration status in Settings
+- Review the integration logs for errors
+- Ensure you have the necessary permissions
+
+### Content Not Publishing
+
+If your content isn't publishing:
+
+- Check that you have Editor or Admin permissions
+- Verify the page isn't in draft mode
+- Review any validation errors
+- Check your publishing workflow settings
+
+## Next Steps
+
+Now that you're onboarded, here are some recommended next steps:
+
+<CardGroup cols={3}>
+  <Card title="Explore Templates" description="Browse our collection of documentation templates" icon="file-text" href="/quickstart/guide" />
+  <Card title="API Reference" description="Learn about our API endpoints" icon="code" href="/api-reference/introduction" />
+  <Card title="Best Practices" description="Read our documentation best practices guide" icon="book" href="/introduction" />
+</CardGroup>
+
+## Need Help?
+
+If you have questions or need assistance:
+
+- **Documentation**: Browse our [help center](/introduction)
+- **Community**: Join our [Slack community](https://example.com/slack)
+- **Support**: Email us at support@example.com
+- **Status**: Check our [status page](https://status.example.com)
+
+Welcome aboard! We're excited to have you here.
