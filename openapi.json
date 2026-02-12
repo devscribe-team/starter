@@ -1,16 +1,13 @@
 {
   "openapi": "3.1.0",
   "info": {
-    "title": "OpenAPI Plant Store",
-    "description": "A sample API that uses a plant store as an example to demonstrate features in the OpenAPI specification",
-    "license": {
-      "name": "MIT"
-    },
+    "title": "ACME API",
+    "description": "ACME API allows you to programmatically manage your documentation and content",
     "version": "1.0.0"
   },
   "servers": [
     {
-      "url": "http://sandbox.mintlify.com"
+      "url": "https://api.devscribe.com"
     }
   ],
   "security": [
@@ -19,9 +16,9 @@
     }
   ],
   "paths": {
-    "/plants": {
+    "/documents": {
       "get": {
-        "description": "Returns all plants from the system that the user has access to",
+        "description": "Returns all documents from the system that the user has access to",
         "parameters": [
           {
             "name": "limit",
@@ -35,13 +32,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Plant response",
+            "description": "Document response",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/Plant"
+                    "$ref": "#/components/schemas/Document"
                   }
                 }
               }
@@ -60,13 +57,13 @@
         }
       },
       "post": {
-        "description": "Creates a new plant in the store",
+        "description": "Creates a new document in the system",
         "requestBody": {
-          "description": "Plant to add to the store",
+          "description": "Document to add to the system",
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NewPlant"
+                "$ref": "#/components/schemas/NewDocument"
               }
             }
           },
@@ -74,17 +71,17 @@
         },
         "responses": {
           "200": {
-            "description": "plant response",
+            "description": "document response",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Plant"
+                  "$ref": "#/components/schemas/Document"
                 }
               }
             }
           },
           "400": {
-            "description": "unexpected error",
+            "description": "Unexpected error",
             "content": {
               "application/json": {
                 "schema": {
@@ -96,200 +93,28 @@
         }
       }
     },
-    "/plants/{id}": {
-      "put": {
-        "description": "Updates a plant in the store",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "description": "ID of plant to update",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            }
-          }
-        ],
-        "requestBody": {
-          "description": "Plant data to update",
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/NewPlant"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "description": "Plant updated",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Plant"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "unexpected error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        }
-      },
-      "patch": {
-        "description": "Partially updates a plant in the store",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "description": "ID of plant to update",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            }
-          }
-        ],
-        "requestBody": {
-          "description": "Plant data to partially update",
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/Plant"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "description": "Plant updated",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Plant"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "unexpected error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        }
-      },
+    "/documents/{id}": {
       "delete": {
-        "summary": "Delete a plant",
-        "description": "Permanently deletes a single plant from the store based on the ID supplied. This action cannot be undone.",
-        "operationId": "deletePlant",
-        "tags": ["Plants", "Destructive Operations"],
+          "description": "Deletes a single document based on the ID supplied",
         "parameters": [
           {
             "name": "id",
             "in": "path",
-            "description": "Unique identifier of the plant to delete",
+            "description": "ID of document to delete",
             "required": true,
             "schema": {
               "type": "integer",
               "format": "int64"
-            },
-            "example": 12345
-          },
-          {
-            "name": "force",
-            "in": "query",
-            "description": "If true, bypasses soft-delete and permanently removes the plant",
-            "required": false,
-            "schema": {
-              "type": "boolean",
-              "default": false
-            }
-          },
-          {
-            "name": "X-Confirmation-Token",
-            "in": "header",
-            "description": "A confirmation token required for destructive operations",
-            "required": false,
-            "schema": {
-              "type": "string"
             }
           }
         ],
         "responses": {
-          "200": {
-            "description": "Plant successfully deleted",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "success": {
-                      "type": "boolean",
-                      "description": "Indicates if the deletion was successful"
-                    },
-                    "deletedAt": {
-                      "type": "string",
-                      "format": "date-time",
-                      "description": "Timestamp when the plant was deleted"
-                    },
-                    "deletedPlant": {
-                      "$ref": "#/components/schemas/Plant"
-                    }
-                  }
-                }
-              }
-            }
-          },
           "204": {
-            "description": "Plant deleted with no content returned"
+            "description": "Document deleted",
+            "content": {}
           },
           "400": {
-            "description": "Bad request - invalid ID format",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized - authentication required",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden - you don't have permission to delete this plant",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Plant not found",
+            "description": "Unexpected error",
             "content": {
               "application/json": {
                 "schema": {
@@ -303,15 +128,15 @@
     }
   },
   "webhooks": {
-    "/plant/webhook": {
+    "/document/webhook": {
       "post": {
-        "description": "Information about a new plant added to the store",
+        "description": "Information about a new document added to the system",
         "requestBody": {
-          "description": "Plant added to the store",
+          "description": "Document added to the system",
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NewPlant"
+                "$ref": "#/components/schemas/NewDocument"
               }
             }
           }
@@ -326,14 +151,14 @@
   },
   "components": {
     "schemas": {
-      "Plant": {
+      "Document": {
         "required": [
           "name"
         ],
         "type": "object",
         "properties": {
           "name": {
-            "description": "The name of the plant",
+            "description": "The name of the document",
             "type": "string"
           },
           "tag": {
@@ -342,10 +167,10 @@
           }
         }
       },
-      "NewPlant": {
+      "NewDocument": {
         "allOf": [
           {
-            "$ref": "#/components/schemas/Plant"
+            "$ref": "#/components/schemas/Document"
           },
           {
             "required": [
@@ -354,7 +179,7 @@
             "type": "object",
             "properties": {
               "id": {
-                "description": "Identification number of the plant",
+                "description": "Identification number of the document",
                 "type": "integer",
                 "format": "int64"
               }
