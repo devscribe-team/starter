@@ -8,15 +8,11 @@ icon: navigation
 
 `docs.json` is the single source of truth for your documentation navigation. It defines tabs, groups, and the ordered list of pages that appear in the sidebar, and it powers previous/next navigation.
 
-- Location: `src/app/(pages)/docs.json`
-- Used by: navigation, left sidebar, previous/next links, and page metadata helpers
-
 ## File structure
 
 ```json
 {
   "name": "your-site-name",
-  "favicon": "/favicon.svg",
   "navigation": {
     "tabs": [
       {
@@ -55,8 +51,7 @@ icon: navigation
 
 ### Top‑level fields
 
-- `name`: Site identifier used in a few places (branding/logging).
-- `favicon`: Path to the favicon under `public/`.
+- `name`: Site identifier used for branding.
 - `navigation.tabs[]`: Primary navigation areas in the left sidebar.
 - `navigation.global.anchors[]`: Optional external links rendered globally (e.g., footer or header menus), each with `anchor`, `href`, and `icon`.
 
@@ -71,16 +66,16 @@ icon: navigation
 
 ### Pages
 
-- A string entry is a page path (without `.mdx`) relative to `src/app/(pages)`.
+- A string entry is a page path (without `.mdx`) relative to the root of your docs repo.
 - The order of items in `pages` determines:
   - Left sidebar ordering
   - Previous/Next navigation (computed from this order)
-- The file must exist as `src/app/(pages)/<page>.mdx`.
+- The corresponding `.mdx` file must exist at that path (e.g., `quickstart/guide.mdx` for `"quickstart/guide"`).
 - Titles come from the page frontmatter (`title:`). If omitted, a title is derived from the filename.
 
-## Adding a new page to `docs.json`
+## Adding a new page
 
-1. Create a markdown file under `src/app/(pages)` (e.g., `src/app/(pages)/quickstart/my-page.mdx`).
+1. Create a new `.mdx` file in your docs (e.g., `quickstart/my-page.mdx`).
 2. Add frontmatter at the top:
 
 ```md
@@ -161,7 +156,7 @@ icon: code
 ---
 ```
 
-Icon names map to built‑in icons. See `src/lib/sidebar-utils.ts` for the available keys (e.g., `code`, `book`, `file-text`, `slack`, etc.).
+Icon names use [Lucide icons](https://lucide.dev/icons). Common examples: `code`, `book`, `file-text`, `rocket`, `settings`, `zap`, `star`, `users`, `navigation`.
 
 ## Global anchors (optional)
 
@@ -182,18 +177,17 @@ Add external links under `navigation.global.anchors`:
 
 ## Common pitfalls
 
-- The `pages` path must match the markdown path without the `.mdx` extension.
+- The `pages` path must match the file path without the `.mdx` extension.
 - Ordering in `pages` controls Previous/Next; if navigation feels wrong, check order.
 - Titles missing in frontmatter will be auto‑generated from filenames (may not look polished).
-- Invalid `icon` names won’t render; use keys defined in `src/lib/sidebar-utils.ts`.
-- If you add a page but don’t see it, ensure both the file exists and `docs.json` is updated.
+- Invalid `icon` names won't render; use names from [Lucide icons](https://lucide.dev/icons).
+- If you add a page but don't see it, ensure both the file exists and `docs.json` is updated.
 
 ## Full example
 
 ```json
 {
   "name": "devscribe",
-  "favicon": "/favicon.svg",
   "navigation": {
     "tabs": [
       {
@@ -229,13 +223,11 @@ Add external links under `navigation.global.anchors`:
     ],
     "global": {
       "anchors": [
-        { "anchor": "Community", "href": "https://mintlify.com/community", "icon": "slack" }
+        { "anchor": "Community", "href": "https://example.com/community", "icon": "slack" }
       ]
     }
   }
 }
 ```
 
-You’re set—edit `docs.json` to reorganize your docs without touching page code. Changes take effect on the next build/dev reload.
-
-
+You're set — edit `docs.json` to reorganize your docs without touching page content. Changes take effect after you deploy.

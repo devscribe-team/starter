@@ -1,5 +1,45 @@
 ---
 title: Delete Document
 description: Delete a Document from the store
-openapi: DELETE /documents/{id}
+api: DELETE /documents/{id}
+num: 2
 ---
+
+### Authorizations
+
+<ParameterField name="Authorization" type="string" required>
+  Bearer authentication header of the form `Bearer <token>`.
+</ParameterField>
+
+### Path Parameters
+
+<ParameterField name="id" type="integer (int64)" required>
+  ID of document to delete
+</ParameterField>
+
+### Responses
+
+<APIResponse status="204" description="Document deleted" defaultOpen>
+</APIResponse>
+
+<APIResponse status="400" description="Unexpected error" contentType="application/json">
+  <APIResponseField name="error" type="integer" description="" />
+  <APIResponseField name="message" type="string" description="" />
+</APIResponse>
+
+<CodeGroup>
+  <CodeSnippet language="bash" title="cURL">
+  {`curl --request DELETE \\
+--url https://api.devscribe.com/documents/<id> \\
+--header 'Authorization: Bearer <token>'`}
+  </CodeSnippet>
+</CodeGroup>
+
+<CodeGroup>
+  <CodeSnippet language="json" title="400">
+  {`{
+  "error": 123,
+  "message": "string"
+}`}
+  </CodeSnippet>
+</CodeGroup>

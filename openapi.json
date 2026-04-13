@@ -16,91 +16,15 @@
     }
   ],
   "paths": {
-    "/documents": {
-      "get": {
-        "description": "Returns all documents from the system that the user has access to",
-        "parameters": [
-          {
-            "name": "limit",
-            "in": "query",
-            "description": "The maximum number of results to return",
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Document response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/Document"
-                  }
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Unexpected error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        }
-      },
-      "post": {
-        "description": "Creates a new document in the system",
-        "requestBody": {
-          "description": "Document to add to the system",
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/NewDocument"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "description": "document response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Document"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Unexpected error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
     "/documents/{id}": {
-      "delete": {
-          "description": "Deletes a single document based on the ID supplied",
+      "put": {
+        "summary": "Update Document",
+        "description": "Updates an existing document by replacing its content with the provided fields.",
         "parameters": [
           {
             "name": "id",
             "in": "path",
-            "description": "ID of document to delete",
+            "description": "Unique identifier of the document to update",
             "required": true,
             "schema": {
               "type": "integer",
@@ -108,17 +32,147 @@
             }
           }
         ],
+        "requestBody": {
+          "description": "The document fields to update",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["name"],
+                "properties": {
+                  "name": {
+                    "description": "The display name of the document",
+                    "type": "string"
+                  },
+                  "content": {
+                    "description": "The markdown body content",
+                    "type": "string"
+                  },
+                  "status": {
+                    "description": "Publication status",
+                    "type": "string",
+                    "enum": ["draft", "review", "published", "archived"]
+                  },
+                  "tags": {
+                    "description": "Labels for categorizing the document",
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "pinned": {
+                    "description": "Whether the document is pinned to the top of listings",
+                    "type": "boolean"
+                  }
+                }
+              }
+            }
+          }
+        },
         "responses": {
-          "204": {
-            "description": "Document deleted",
-            "content": {}
-          },
-          "400": {
-            "description": "Unexpected error",
+          "200": {
+            "description": "Document updated successfully",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "description": "Unique document identifier",
+                      "type": "integer"
+                    },
+                    "name": {
+                      "description": "The display name of the document",
+                      "type": "string"
+                    },
+                    "slug": {
+                      "description": "URL-friendly identifier",
+                      "type": "string"
+                    },
+                    "status": {
+                      "description": "Current publication status",
+                      "type": "string"
+                    },
+                    "tags": {
+                      "description": "Labels for categorizing the document",
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "pinned": {
+                      "description": "Whether the document is pinned",
+                      "type": "boolean"
+                    },
+                    "created_at": {
+                      "description": "Timestamp when the document was created",
+                      "type": "string",
+                      "example": "2024-01-15T10:30:00Z"
+                    },
+                    "updated_at": {
+                      "description": "Timestamp of the last update",
+                      "type": "string",
+                      "example": "2024-02-01T09:00:00Z"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Validation failed for the provided fields",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "integer"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication credentials are missing or invalid"
+          },
+          "404": {
+            "description": "No document found with the specified ID",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "integer"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "An unexpected server error occurred",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "integer"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
                 }
               }
             }
@@ -127,83 +181,7 @@
       }
     }
   },
-  "webhooks": {
-    "/document/webhook": {
-      "post": {
-        "description": "Information about a new document added to the system",
-        "requestBody": {
-          "description": "Document added to the system",
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/NewDocument"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Return a 200 status to indicate that the data was received successfully"
-          }
-        }
-      }
-    }
-  },
   "components": {
-    "schemas": {
-      "Document": {
-        "required": [
-          "name"
-        ],
-        "type": "object",
-        "properties": {
-          "name": {
-            "description": "The name of the document",
-            "type": "string"
-          },
-          "tag": {
-            "description": "Tag to specify the type",
-            "type": "string"
-          }
-        }
-      },
-      "NewDocument": {
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/Document"
-          },
-          {
-            "required": [
-              "id"
-            ],
-            "type": "object",
-            "properties": {
-              "id": {
-                "description": "Identification number of the document",
-                "type": "integer",
-                "format": "int64"
-              }
-            }
-          }
-        ]
-      },
-      "Error": {
-        "required": [
-          "error",
-          "message"
-        ],
-        "type": "object",
-        "properties": {
-          "error": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "message": {
-            "type": "string"
-          }
-        }
-      }
-    },
     "securitySchemes": {
       "bearerAuth": {
         "type": "http",

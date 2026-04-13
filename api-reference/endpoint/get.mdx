@@ -1,5 +1,55 @@
 ---
 title: Get Documents
 description: Retrieve a list of documents in your Devscribe workspace
-openapi: GET /documents
+api: GET /documents
+num: 2
 ---
+
+### Authorizations
+
+<ParameterField name="Authorization" type="string" required>
+  Bearer authentication header of the form `Bearer <token>`.
+</ParameterField>
+
+### Query Parameters
+
+<ParameterField name="limit" type="integer (int32)">
+  The maximum number of results to return
+</ParameterField>
+
+### Responses
+
+<APIResponse status="200" description="Document response" contentType="application/json" defaultOpen>
+  <APIResponseField name="name" type="string" description="The name of the document" />
+  <APIResponseField name="tag" type="string" description="Tag to specify the type" />
+</APIResponse>
+
+<APIResponse status="400" description="Unexpected error" contentType="application/json">
+  <APIResponseField name="error" type="integer" description="" />
+  <APIResponseField name="message" type="string" description="" />
+</APIResponse>
+
+<CodeGroup>
+  <CodeSnippet language="bash" title="cURL">
+  {`curl --request GET \\
+--url https://api.devscribe.com/documents?limit=<limit> \\
+--header 'Authorization: Bearer <token>'`}
+  </CodeSnippet>
+</CodeGroup>
+
+<CodeGroup>
+  <CodeSnippet language="json" title="200">
+  {`[
+  {
+    "name": "string",
+    "tag": "string"
+  }
+]`}
+  </CodeSnippet>
+  <CodeSnippet language="json" title="400">
+  {`{
+  "error": 123,
+  "message": "string"
+}`}
+  </CodeSnippet>
+</CodeGroup>

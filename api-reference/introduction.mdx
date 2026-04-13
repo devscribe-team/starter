@@ -1,15 +1,11 @@
 ---
-title: API Reference Introduction
+title: API Reference
 icon: book
 ---
 
-# API Reference
-
-Welcome to ACME API documentation. Our REST API allows you to programmatically manage your documentation and content.
+The ACME REST API lets you manage documents and content programmatically. All endpoints return JSON and use standard HTTP methods.
 
 ## Base URL
-
-All API endpoints are relative to:
 
 ```
 https://api.devscribe.com/v1
@@ -17,26 +13,28 @@ https://api.devscribe.com/v1
 
 ## Authentication
 
-The API uses API key authentication. Include your API key in the `Authorization` header:
+Include your API key in the `Authorization` header on every request:
 
 ```bash
 Authorization: Bearer YOUR_API_KEY
 ```
 
 <Callout type="info">
-
-You can find your API key in your [account settings](/settings/api).
+You can generate and manage API keys from your [account settings](/settings/api).
 </Callout>
 
-## Rate Limiting
+## Endpoints Overview
 
-The API is rate limited to:
-- **100 requests per minute** for authenticated requests
-- **20 requests per minute** for unauthenticated requests
+<CardGroup cols={2}>
+  <Card title="GET /documents" description="Retrieve a list of documents in your workspace" icon="file-text" href="/api-reference/endpoint/get" />
+  <Card title="POST /documents" description="Create a new document" icon="plus" href="/api-reference/endpoint/post" />
+  <Card title="PUT /documents/{id}" description="Update an existing document by ID" icon="edit" href="/api-reference/endpoint/put" />
+  <Card title="DELETE /documents/{id}" description="Permanently remove a document" icon="trash" href="/api-reference/endpoint/delete" />
+</CardGroup>
 
 ## Response Format
 
-All API responses are returned in JSON format:
+Every successful response wraps data in a consistent envelope:
 
 ```json
 {
@@ -46,9 +44,7 @@ All API responses are returned in JSON format:
 }
 ```
 
-## Error Handling
-
-Error responses include a status code and error message:
+Error responses follow the same structure with an error code:
 
 ```json
 {
@@ -56,4 +52,82 @@ Error responses include a status code and error message:
   "success": false,
   "code": 404
 }
-``` 
+```
+
+## Rate Limits
+
+<Table>
+  <TableHead>
+    <TableRow>
+      <TableHeaderCell>Plan</TableHeaderCell>
+      <TableHeaderCell>Authenticated</TableHeaderCell>
+      <TableHeaderCell>Unauthenticated</TableHeaderCell>
+    </TableRow>
+  </TableHead>
+  <TableBody>
+    <TableRow>
+      <TableCell>Free</TableCell>
+      <TableCell>100 req/min</TableCell>
+      <TableCell>20 req/min</TableCell>
+    </TableRow>
+    <TableRow>
+      <TableCell>Pro</TableCell>
+      <TableCell>1,000 req/min</TableCell>
+      <TableCell>50 req/min</TableCell>
+    </TableRow>
+    <TableRow>
+      <TableCell>Enterprise</TableCell>
+      <TableCell>Custom</TableCell>
+      <TableCell>Custom</TableCell>
+    </TableRow>
+  </TableBody>
+</Table>
+
+<Callout type="warning">
+When you exceed the rate limit, the API returns `429 Too Many Requests`. Back off and retry with exponential delay.
+</Callout>
+
+## Status Codes
+
+<Table>
+  <TableHead>
+    <TableRow>
+      <TableHeaderCell>Code</TableHeaderCell>
+      <TableHeaderCell>Meaning</TableHeaderCell>
+    </TableRow>
+  </TableHead>
+  <TableBody>
+    <TableRow>
+      <TableCell>`200`</TableCell>
+      <TableCell>Success</TableCell>
+    </TableRow>
+    <TableRow>
+      <TableCell>`201`</TableCell>
+      <TableCell>Resource created</TableCell>
+    </TableRow>
+    <TableRow>
+      <TableCell>`204`</TableCell>
+      <TableCell>Deleted (no content)</TableCell>
+    </TableRow>
+    <TableRow>
+      <TableCell>`400`</TableCell>
+      <TableCell>Bad request / validation error</TableCell>
+    </TableRow>
+    <TableRow>
+      <TableCell>`401`</TableCell>
+      <TableCell>Missing or invalid API key</TableCell>
+    </TableRow>
+    <TableRow>
+      <TableCell>`404`</TableCell>
+      <TableCell>Resource not found</TableCell>
+    </TableRow>
+    <TableRow>
+      <TableCell>`429`</TableCell>
+      <TableCell>Rate limit exceeded</TableCell>
+    </TableRow>
+    <TableRow>
+      <TableCell>`500`</TableCell>
+      <TableCell>Internal server error</TableCell>
+    </TableRow>
+  </TableBody>
+</Table>

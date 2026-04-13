@@ -1,5 +1,67 @@
 ---
 title: Create Document
 description: Creates a new document in your Devscribe workspace
-openapi: POST /documents
+api: POST /documents
+num: 2
 ---
+
+### Authorizations
+
+<ParameterField name="Authorization" type="string" required>
+  Bearer authentication header of the form `Bearer <token>`.
+</ParameterField>
+
+### Body
+
+<ParameterField name="name" type="string" required>
+  The name of the document
+</ParameterField>
+
+<ParameterField name="tag" type="string">
+  Tag to specify the type
+</ParameterField>
+
+<ParameterField name="id" type="integer" required>
+  Identification number of the document
+</ParameterField>
+
+### Responses
+
+<APIResponse status="200" description="document response" contentType="application/json" defaultOpen>
+  <APIResponseField name="name" type="string" description="The name of the document" />
+  <APIResponseField name="tag" type="string" description="Tag to specify the type" />
+</APIResponse>
+
+<APIResponse status="400" description="Unexpected error" contentType="application/json">
+  <APIResponseField name="error" type="integer" description="" />
+  <APIResponseField name="message" type="string" description="" />
+</APIResponse>
+
+<CodeGroup>
+  <CodeSnippet language="bash" title="cURL">
+  {`curl --request POST \\
+--url https://api.devscribe.com/documents \\
+--header 'Authorization: Bearer <token>' \\
+--header 'Content-Type: application/json' \\
+--data '{
+  "name": "string",
+  "tag": "string",
+  "id": 12345
+}'`}
+  </CodeSnippet>
+</CodeGroup>
+
+<CodeGroup>
+  <CodeSnippet language="json" title="200">
+  {`{
+  "name": "string",
+  "tag": "string"
+}`}
+  </CodeSnippet>
+  <CodeSnippet language="json" title="400">
+  {`{
+  "error": 123,
+  "message": "string"
+}`}
+  </CodeSnippet>
+</CodeGroup>

@@ -146,7 +146,7 @@ Use triple backticks with language specification:
 
 # Custom MDX Components
 
-Custom MDX components supported by this repo
+All the custom MDX components available for your documentation pages.
 
 Tip: Components can be nested (e.g., a callout inside a card, code fences inside tabs).
 
@@ -1460,6 +1460,146 @@ func main() {
   </Callout>
   </Tab>
   </TabGroup>
+  ````
+  </Tab>
+</TabGroup>
+
+## Tables
+
+Use `<Table>` components for structured data with styled headers, borders, and hover states.
+
+<TabGroup>
+  <Tab title="Preview">
+  <Table>
+    <TableHead>
+      <TableRow>
+        <TableHeaderCell>Property</TableHeaderCell>
+        <TableHeaderCell>Type</TableHeaderCell>
+        <TableHeaderCell>Required</TableHeaderCell>
+        <TableHeaderCell>Description</TableHeaderCell>
+      </TableRow>
+    </TableHead>
+    <TableBody>
+      <TableRow>
+        <TableCell>`id`</TableCell>
+        <TableCell>string</TableCell>
+        <TableCell>Yes</TableCell>
+        <TableCell>Unique identifier</TableCell>
+      </TableRow>
+      <TableRow>
+        <TableCell>`name`</TableCell>
+        <TableCell>string</TableCell>
+        <TableCell>Yes</TableCell>
+        <TableCell>Display name</TableCell>
+      </TableRow>
+      <TableRow>
+        <TableCell>`email`</TableCell>
+        <TableCell>string</TableCell>
+        <TableCell>No</TableCell>
+        <TableCell>Contact email</TableCell>
+      </TableRow>
+      <TableRow>
+        <TableCell>`role`</TableCell>
+        <TableCell>enum</TableCell>
+        <TableCell>No</TableCell>
+        <TableCell>One of `admin`, `editor`, `viewer`</TableCell>
+      </TableRow>
+      <TableRow>
+        <TableCell>`createdAt`</TableCell>
+        <TableCell>datetime</TableCell>
+        <TableCell>Yes</TableCell>
+        <TableCell>ISO 8601 timestamp</TableCell>
+      </TableRow>
+    </TableBody>
+  </Table>
+  </Tab>
+
+  <Tab title="Syntax">
+  ````markdown
+  <Table>
+    <TableHead>
+      <TableRow>
+        <TableHeaderCell>Property</TableHeaderCell>
+        <TableHeaderCell>Type</TableHeaderCell>
+        <TableHeaderCell>Required</TableHeaderCell>
+        <TableHeaderCell>Description</TableHeaderCell>
+      </TableRow>
+    </TableHead>
+    <TableBody>
+      <TableRow>
+        <TableCell>`id`</TableCell>
+        <TableCell>string</TableCell>
+        <TableCell>Yes</TableCell>
+        <TableCell>Unique identifier</TableCell>
+      </TableRow>
+      <TableRow>
+        <TableCell>`name`</TableCell>
+        <TableCell>string</TableCell>
+        <TableCell>Yes</TableCell>
+        <TableCell>Display name</TableCell>
+      </TableRow>
+    </TableBody>
+  </Table>
+  ````
+  </Tab>
+</TabGroup>
+
+## Column Layout
+
+Use `<Column>` to arrange content in a responsive grid. Accepts `cols` (1–4) and `gap` (`sm`, `md`, `lg`).
+
+<TabGroup>
+  <Tab title="Preview">
+  <Column cols={2}>
+  <Card title="Left Column" icon="layout">
+  Content in the first column. Cards, text, code blocks, and other components all work inside columns.
+  </Card>
+
+  <Card title="Right Column" icon="layers">
+  Content in the second column. The grid is responsive — columns stack on smaller screens.
+  </Card>
+  </Column>
+
+  <Column cols={3} gap="sm">
+  <Callout type="info">
+  First column callout.
+  </Callout>
+
+  <Callout type="warning">
+  Second column callout.
+  </Callout>
+
+  <Callout type="success">
+  Third column callout.
+  </Callout>
+  </Column>
+  </Tab>
+
+  <Tab title="Syntax">
+  ````markdown
+  <Column cols={2}>
+  <Card title="Left Column" icon="layout">
+  Content in the first column.
+  </Card>
+
+  <Card title="Right Column" icon="layers">
+  Content in the second column.
+  </Card>
+  </Column>
+
+  <Column cols={3} gap="sm">
+  <Callout type="info">
+  First column callout.
+  </Callout>
+
+  <Callout type="warning">
+  Second column callout.
+  </Callout>
+
+  <Callout type="success">
+  Third column callout.
+  </Callout>
+  </Column>
   ````
   </Tab>
 </TabGroup>
