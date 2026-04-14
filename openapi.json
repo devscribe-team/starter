@@ -1,13 +1,13 @@
 {
-  "openapi": "3.1.0",
+  "openapi": "1.0.0",
   "info": {
-    "title": "ACME API",
-    "description": "ACME API allows you to programmatically manage your documentation and content",
+    "title": "Devscribe",
+    "description": "API for managing documents and testing endpoints",
     "version": "1.0.0"
   },
   "servers": [
     {
-      "url": "https://api.devscribe.com"
+      "url": "https://api.example.com"
     }
   ],
   "security": [
@@ -38,34 +38,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "type": "object",
-                "required": ["name"],
-                "properties": {
-                  "name": {
-                    "description": "The display name of the document",
-                    "type": "string"
-                  },
-                  "content": {
-                    "description": "The markdown body content",
-                    "type": "string"
-                  },
-                  "status": {
-                    "description": "Publication status",
-                    "type": "string",
-                    "enum": ["draft", "review", "published", "archived"]
-                  },
-                  "tags": {
-                    "description": "Labels for categorizing the document",
-                    "type": "array",
-                    "items": {
-                      "type": "string"
-                    }
-                  },
-                  "pinned": {
-                    "description": "Whether the document is pinned to the top of listings",
-                    "type": "boolean"
-                  }
-                }
+                "$ref": "#/components/schemas/Document"
               }
             }
           }
@@ -76,103 +49,17 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "id": {
-                      "description": "Unique document identifier",
-                      "type": "integer"
-                    },
-                    "name": {
-                      "description": "The display name of the document",
-                      "type": "string"
-                    },
-                    "slug": {
-                      "description": "URL-friendly identifier",
-                      "type": "string"
-                    },
-                    "status": {
-                      "description": "Current publication status",
-                      "type": "string"
-                    },
-                    "tags": {
-                      "description": "Labels for categorizing the document",
-                      "type": "array",
-                      "items": {
-                        "type": "string"
-                      }
-                    },
-                    "pinned": {
-                      "description": "Whether the document is pinned",
-                      "type": "boolean"
-                    },
-                    "created_at": {
-                      "description": "Timestamp when the document was created",
-                      "type": "string",
-                      "example": "2024-01-15T10:30:00Z"
-                    },
-                    "updated_at": {
-                      "description": "Timestamp of the last update",
-                      "type": "string",
-                      "example": "2024-02-01T09:00:00Z"
-                    }
-                  }
+                  "$ref": "#/components/schemas/Document"
                 }
               }
             }
           },
           "400": {
-            "description": "Validation failed for the provided fields",
+            "description": "Validation failed",
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "error": {
-                      "type": "integer"
-                    },
-                    "message": {
-                      "type": "string"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Authentication credentials are missing or invalid"
-          },
-          "404": {
-            "description": "No document found with the specified ID",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "error": {
-                      "type": "integer"
-                    },
-                    "message": {
-                      "type": "string"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "An unexpected server error occurred",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "error": {
-                      "type": "integer"
-                    },
-                    "message": {
-                      "type": "string"
-                    }
-                  }
+                  "$ref": "#/components/schemas/Error"
                 }
               }
             }
@@ -182,6 +69,35 @@
     }
   },
   "components": {
+    "schemas": {
+      "Document": {
+        "required": ["name"],
+        "type": "object",
+        "properties": {
+          "name": {
+            "description": "The display name of the document",
+            "type": "string"
+          },
+          "tag": {
+            "description": "Tag to specify the type",
+            "type": "string"
+          }
+        }
+      },
+      "Error": {
+        "required": ["error", "message"],
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "message": {
+            "type": "string"
+          }
+        }
+      }
+    },
     "securitySchemes": {
       "bearerAuth": {
         "type": "http",
